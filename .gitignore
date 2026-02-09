@@ -2,7 +2,10 @@
 *.class
 
 # Log files
+logs/
 *.log
+*.log.gz
+
 
 # Package files
 *.jar
