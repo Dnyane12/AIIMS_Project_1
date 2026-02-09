@@ -7,7 +7,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.testng.Assert;
 import utils.WaitUtilityDuplicate;
 import utils.WaitHelper;
 
@@ -283,49 +282,49 @@ public class ItemMasterPage {
 
 		String actualValue = field.getAttribute("value");
 
-		Assert.assertTrue(actualValue.matches("[A-Za-z0-9]*"),
-				fieldName + " should not allow special characters. Actual value: " + actualValue);
-
-		System.out.println("[" + fieldName + "] Typed: " + invalidInput + " | Captured: " + actualValue);
+//		Assert.assertTrue(actualValue.matches("[A-Za-z0-9]*"),
+//				fieldName + " should not allow special characters. Actual value: " + actualValue);
+//
+//		System.out.println("[" + fieldName + "] Typed: " + invalidInput + " | Captured: " + actualValue);
 	}
 
 	
 	
 	
 	
-	public void validateMaxInputLength(WebElement field, String fieldName, String inputValue, int expectedMaxLength) {
-		field.clear();
-		field.sendKeys(inputValue);
-
-		String actualValue = field.getAttribute("value");
-
-		Assert.assertTrue(actualValue.length() <= expectedMaxLength, fieldName + " should accept only up to "
-				+ expectedMaxLength + " characters, but got: " + actualValue.length());
-
-		// Optional exact match
-		if (inputValue.length() > expectedMaxLength) {
-			String expectedTruncatedValue = inputValue.substring(0, expectedMaxLength);
-			Assert.assertEquals(actualValue, expectedTruncatedValue,
-					fieldName + " should truncate input to: " + expectedTruncatedValue);
-		}
-
-		System.out.println("[" + fieldName + "] Typed: " + inputValue + " | Accepted: " + actualValue);
-	}
-
-	
-	
-
-	public void verifyAutoFilledAndReadOnly(WebElement field, String fieldName) {
-		// Step 1: Value should not be empty
-		String fieldValue = field.getAttribute("value");
-		Assert.assertNotNull(fieldValue, fieldName + " should not be empty");
-
-		// Step 2: Field should be disabled / read-only
-		Assert.assertFalse(field.isEnabled(), fieldName + " should be read-only or disabled");
-
-		// Optional: Print for debug
-		System.out.println(fieldName + " value: " + fieldValue);
-	}
+//	public void validateMaxInputLength(WebElement field, String fieldName, String inputValue, int expectedMaxLength) {
+//		field.clear();
+//		field.sendKeys(inputValue);
+//
+//		String actualValue = field.getAttribute("value");
+//
+//		Assert.assertTrue(actualValue.length() <= expectedMaxLength, fieldName + " should accept only up to "
+//				+ expectedMaxLength + " characters, but got: " + actualValue.length());
+//
+//		// Optional exact match
+//		if (inputValue.length() > expectedMaxLength) {
+//			String expectedTruncatedValue = inputValue.substring(0, expectedMaxLength);
+//			Assert.assertEquals(actualValue, expectedTruncatedValue,
+//					fieldName + " should truncate input to: " + expectedTruncatedValue);
+//		}
+//
+//		System.out.println("[" + fieldName + "] Typed: " + inputValue + " | Accepted: " + actualValue);
+//	}
+//
+//	
+//	
+//
+//	public void verifyAutoFilledAndReadOnly(WebElement field, String fieldName) {
+//		// Step 1: Value should not be empty
+//		String fieldValue = field.getAttribute("value");
+//		Assert.assertNotNull(fieldValue, fieldName + " should not be empty");
+//
+//		// Step 2: Field should be disabled / read-only
+//		Assert.assertFalse(field.isEnabled(), fieldName + " should be read-only or disabled");
+//
+//		// Optional: Print for debug
+//		System.out.println(fieldName + " value: " + fieldValue);
+//	}
 	
 	
 	

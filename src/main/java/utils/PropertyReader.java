@@ -5,7 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.Properties;
 
-import org.testng.annotations.Test;
+
 
 public class PropertyReader {
 	Properties prop;
