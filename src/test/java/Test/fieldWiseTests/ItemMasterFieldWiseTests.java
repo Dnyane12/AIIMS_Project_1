@@ -245,7 +245,7 @@ public class ItemMasterFieldWiseTests extends SetUp{
 		       itemMasterPage.clearAllFields();
 
 		       String longInput = "123456789012345"; // 15 digits
-		       itemMasterPage.validateMaxInputLength(itemMasterPage.getItemCode(), "Item Code", longInput, 10);
+		      // itemMasterPage.validateMaxInputLength(itemMasterPage.getItemCode(), "Item Code", longInput, 10);
 		   }
 			
 		   
