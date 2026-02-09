@@ -1,0 +1,75 @@
+package Test.flowWiseTest;
+
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Test;
+
+import Test.salesModuleTests.transTest.MultiSaleOrderTest;
+import Test.salesModuleTests.transTest.SalesDispatchTest;
+import Test.salesModuleTests.transTest.TaxInvoiceTest;
+import base.SetUp;
+import flowPack.salesModuleFlow.transactionFlow.MultiSaleOrderFlow;
+import flowPack.salesModuleFlow.transactionFlow.SaleDispatchFlow;
+import flowPack.salesModuleFlow.transactionFlow.TaxInvoiceFlow;
+import flowPack.setUpFlow.HomeFlow;
+import flowPack.setUpFlow.LoginFlow;
+
+public class E2EFlowTests extends SetUp{
+	/*(E2E Flow Tests (Few, Critical) ,Purpose: 
+	Validate complete business flow ,Ensure no blockers in production-like scenarios ,Catch high-impact failures)*/
+	
+	//This class going to execute only the flow test cases.
+	LoginFlow loginFlow;
+	HomeFlow homeFlow;
+	MultiSaleOrderFlow saleOFlow;
+	SaleDispatchFlow saleDisFlow;
+	TaxInvoiceFlow taxInvFlow;
+	String dispatchNo;
+	
+	
+	@BeforeClass(groups = "sales-flow")
+	public void completeFlowSetup(){
+	homeFlow= new HomeFlow(driver);
+	loginFlow = new LoginFlow(driver);
+	saleOFlow = new MultiSaleOrderFlow(driver);
+	saleDisFlow = new SaleDispatchFlow(driver);	
+	taxInvFlow = new TaxInvoiceFlow(driver);
+	}
+	
+	
+	         //Flow to Execute multi sale oredr flow
+		    @Test(enabled=true,groups = "sales-flow")
+		    public void createSaleOrder() { 
+		    	saleOFlow.prepareEnvironment();
+		    	saleOFlow.createMultiSaleOrder();
+		    }
+
+		    
+		     //Flow to execute Sale Dispatch Flow.
+		    @Test(groups = "sales-flow" ,dependsOnMethods = "createSaleOrder")
+		    public void createSaleDispatch() {
+		    	try {
+		    	saleDisFlow.prapareEnvToDirectlyOpenSDForm();
+		         dispatchNo=saleDisFlow.createSaleDispatchEntry();
+		    	}catch(Exception e) {
+		    		e.printStackTrace();
+		    	}
+		    }
+
+		    
+		    //Flow to execute Tax Invoice Flow.
+		    @Test(groups = "sales-flow",dependsOnMethods = "createSaleDispatch")
+		    public void createTaxInvoice() {
+		    	System.out.print("dispatchNo in createTaxInvoice() of E2EFlowTest class:"+dispatchNo);
+		    	taxInvFlow.prepareEnvToDirectlyOpenSDForm();
+		    	taxInvFlow.createTaxInvoice(dispatchNo);	    	
+		    }
+		
+
+
+	
+}
+	
+
+	
+	
+

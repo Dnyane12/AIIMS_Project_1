@@ -1,0 +1,8 @@
+# Auto-normalize line endings
+* text=auto
+
+# Ignore binary files
+*.png binary
+*.jpg binary
+*.jar binary
+*.exe binary

@@ -1,0 +1,11 @@
+locationLabel=Location
+locationOpt=FG STORE
+routeLabel=Route
+routeOpt=7232-umred
+stateLabel=State
+stateOpt=Maharashtra
+deleteItemRecord=Yes
+dbURL=jdbc:mysql://10.0.10.254:3306/dinshawserp
+username=dinshawserp
+password=D!n$H@w$D3e
+

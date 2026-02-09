@@ -1,0 +1,639 @@
+package pageObjects.inventory.transaction;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+
+import utils.SimpleDropUtil;
+import utils.WaitHelper;
+import utils.WaitUtilityDuplicate;
+
+public class GoodReceiptNotePage {
+	WebDriver driver;
+	private static Logger logger=LogManager.getLogger(GoodReceiptNotePage.class);
+
+	public GoodReceiptNotePage(WebDriver driver) {
+		this.driver = driver;
+		PageFactory.initElements(driver, this);
+	}
+
+	@FindBy(xpath = "(//span[normalize-space(text())='Stores' and contains(@class,'fs-13')])[1]")
+	private WebElement storeLink;
+
+	@FindBy(xpath = "(//span[contains(normalize-space(.),'Good Receipt Note') and contains(@class,'fs-12')])[1]")
+	private WebElement goodReceiptNoteFormLink;
+
+	@FindBy(xpath = "(//button[contains(normalize-space(.),'Create New') and contains(@class,'icon-button')])[1]")
+	private WebElement createNewButton;
+
+	By vendorDropField=By.xpath("(//label[normalize-space(text()='Vendor')]/following::input[@class='igx-input-group__input'])[1]");
+
+	By vendorDropOptField= By.xpath("//div//span[contains(normalize-space(text()),'SUP0000199')]");
+	
+	@FindBy(xpath = "(//label[normalize-space(text())='PO No.']/following::igx-icon[normalize-space(text())='expand_more'])[1]")
+	private WebElement poNoDropList;
+
+	@FindBy(xpath = "//input[@name='searchInput']")
+	private WebElement poNoSearchPopup;
+
+	@FindBy(xpath = "(//igx-checkbox[contains(@id,'igx-checkbox')])[3]")
+	private WebElement poOptionCheckbox;
+
+	@FindBy(xpath = "//button[normalize-space(text())='Fetch Data' and @id='l_grn_create_fetch_data-width-selector']")
+	private WebElement fetchDataButton;
+
+	@FindBy(xpath = "//igx-grid//igx-grid-row")
+	private WebElement grid;
+
+	@FindBy(xpath = "//app-g-label[normalize-space(text())='GRN Info']")
+	private WebElement grnInfoTab;
+
+	@FindBy(xpath = "(//label[normalize-space(text())='Transporter Mode']/following::igx-icon[normalize-space(text())='expand_more'])[1]")
+	private WebElement transporterMode;
+
+	@FindBy(xpath = "//input[@id='l_ingh_lr_no']")
+	private WebElement lrNoField;
+
+	@FindBy(xpath = "(//input[contains(@class,'igx-date-picker__input-date')])[3]")
+	private WebElement lrDateField;
+
+	@FindBy(xpath = "//input[(@id='l_ingh_invoice_no')]")
+	private WebElement invoiceNoField;
+
+	@FindBy(xpath = "(//input[contains(@class,'igx-date-picker__input-date')])[4]")
+	private WebElement invoiceDateField;
+
+	@FindBy(xpath = "(//app-g-label[normalize-space((text())='GRN Details')])[3]")
+	private WebElement grnDetailsTab;
+
+	@FindBy(xpath = "//igx-icon[normalize-space(text())='edit' and contains(@class,'material-icons')]")
+	private WebElement editIcon;
+
+	@FindBy(xpath = "(//app-g-label[normalize-space((text())='GRN PO')])[1]")
+	private WebElement grnPoTab;
+
+	@FindBy(xpath = "//input[contains(@id,'l_ingd_inv_qty')]")
+	private WebElement invoiceQtyField;
+
+	@FindBy(xpath = "//input[contains(@id,'l_ingd_recd_qty')]")
+	private WebElement receivedQtyField;
+
+	@FindBy(xpath = "//input[contains(@id,'l_ingd_accepted_qty')]")
+	private WebElement acceptedQtyField;
+
+	@FindBy(xpath = "(//button[normalize-space(text())='Update'])[1]")
+	private WebElement updateButton;
+
+	@FindBy(xpath = "//span[contains(normalize-space(text()),'Total Net Value')]")
+	private WebElement netvalueWholeText;
+
+	@FindBy(xpath = "//input[contains(@id,'l_ingh_invoice_value')]")
+	private WebElement invoiceValueGrnInfoTab;
+
+	@FindBy(xpath = "//button[normalize-space(text())='Submit']")
+	private WebElement submitButton;
+
+	By dotSpinner = By.xpath("/html/body/app-root/div/div/div/div/div");
+
+	@FindBy(xpath = "//input[contains(@id,'l_ingd_remarks')]")
+	private WebElement remarkField;
+
+	@FindBy(xpath = "//igx-grid-header[@id='l_inv_grn_hdr_igx_grid_ingh_doc_no']/following::igx-grid-cell[contains(@class,'igx-grid__td') and @id='l_inv_grn_hdr_igx_grid_0_0']")
+	private WebElement listingGrnNo;
+
+	@FindBy(xpath = "//span[normalize-space()='Good Receipt Note']")
+	private WebElement listingTitle;
+
+	@FindBy(xpath = "//div[@class='igx-snackbar__message' and contains(text(),'GRN Created successfully')]")
+	private WebElement submitSuccMsg;
+
+	@FindBy(xpath = "//span[normalize-space(text())='Good Receipt Note' and contains(@class,'fs-18')]")
+	private WebElement listingPageHeader;
+
+	@FindBy(xpath = "//label[normalize-space()='Vendor']/ancestor::igx-input-group//input[@role='combobox']")
+	private WebElement selVendorField;
+
+	@FindBy(xpath = "(//label[normalize-space()='PO No.']/ancestor::igx-input-group//input[@role='combobox'])[1]")
+	private WebElement selPoNoField;
+
+	@FindBy(xpath = "//button[contains(@id,'l_action_reset_btn-width-selector') and normalize-space()='Reset']")
+	private WebElement resetButton;
+
+	@FindBy(xpath = "//button[contains(@id,'l_action_back_btn-width-selector') and normalize-space()='Back']")
+	private WebElement backButton;
+
+	@FindBy(xpath = "//div[contains(@id,'1_title') and normalize-space()='Confirmation']")
+	private WebElement confirmationPopup;
+
+	@FindBy(xpath = "//button[contains(@class,'igx-button') and normalize-space()='OK']")
+	private WebElement confOkButton;
+
+	By listpageHeader = By
+			.xpath("//span[contains(@class,'fs-18') and contains(normalize-space(),'Good Receipt Note')]");
+
+//Action methods
+	public WebElement getRemarkField() {
+		return remarkField;
+	}
+
+	public By getListpageHeader() {
+		return listpageHeader;
+	}
+
+	public void setRemarkField(WebElement remarkField) {
+		this.remarkField = remarkField;
+	}
+
+	public By getDotSpinner() {
+		return dotSpinner;
+	}
+
+	public void setDotSpinner(By dotSpinner) {
+		this.dotSpinner = dotSpinner;
+	}
+
+	public void clickStoreLink() {
+		WaitHelper.waitForInvisibilityOfElementLocated(driver, dotSpinner, 10);
+		WaitHelper.waitForClickable(driver, storeLink, 10);
+		storeLink.click();
+	}
+
+	public void clickGrnLink() {
+		WaitHelper.waitForClickable(driver, goodReceiptNoteFormLink, 10);
+		goodReceiptNoteFormLink.click();
+	}
+
+	public void clickCreateNewButton() {
+		WaitHelper.waitForInvisibilityOfElementLocated(driver, dotSpinner, 10);
+		createNewButton.click();
+	}
+
+	public void selectVendor(String vendorDropOption) {
+		SimpleDropUtil.selectDropOption(driver,vendorDropField, vendorDropOptField,vendorDropOption);
+	}
+
+	public void enterPoNoToSearch(String poNoDropOption) {
+		WaitHelper.waitForClickable(driver, poNoDropList, 10);
+		WaitHelper.waitForClickable(driver, poNoSearchPopup, 10);
+		poNoSearchPopup.sendKeys(poNoDropOption);
+		WaitHelper.waitForClickable(driver, poOptionCheckbox, 10);
+		poOptionCheckbox.click();
+	}
+
+	public void clickFetchData() {
+		WaitHelper.waitForClickable(driver, fetchDataButton, 10);
+		fetchDataButton.click();
+	}
+
+	public void clickGrnInfoTab() {
+		WaitHelper.waitForClickable(driver, grnInfoTab, 10);
+		grnInfoTab.click();
+	}
+
+	public void selectTransporterMode(String transporterModeLabel, String transporterModeOption) {
+		WaitHelper.waitForClickable(driver, transporterMode, 10);
+		WaitUtilityDuplicate.selectFromComboWithoutSearch(driver, transporterModeLabel, transporterModeOption);
+		// WaitUtilityDuplicate.selectFromComboWithoutSearch(driver, wait,
+		// transporterModeLabel, transporterModeOption);
+	}
+
+	public void enterLrNo(String lrNo) {
+		WaitHelper.waitForClickable(driver, lrNoField, 10);
+		lrNoField.click();
+		lrNoField.sendKeys(lrNo);
+	}
+
+	public void enterLrDate(String lrDate) {
+		WaitHelper.waitForClickable(driver, lrDateField, 10);
+		lrDateField.click();
+		lrDateField.sendKeys(lrDate);
+	}
+
+	public void enterInvoiceNo(String InvoiceNo) {
+		WaitHelper.waitForClickable(driver, invoiceNoField, 10);
+		invoiceNoField.click();
+		invoiceNoField.sendKeys(InvoiceNo);
+	}
+
+	public void enterInvoiceDate(String invoiceDate) {
+		WaitHelper.waitForClickable(driver, invoiceDateField, 10);
+		invoiceDateField.click();
+		invoiceDateField.sendKeys(invoiceDate);
+	}
+
+	public void clickGrnDetailsTab() {
+		WaitHelper.waitForClickable(driver, grnDetailsTab, 10);
+		grnDetailsTab.click();
+	}
+
+	public void clickEditIcon() {
+		WaitHelper.waitForClickable(driver, editIcon, 10);
+		editIcon.click();
+	}
+
+	public void enterInvoiceQuantity(String invoiceQty) {
+		WaitHelper.waitForClickable(driver, invoiceQtyField, 10);
+		invoiceQtyField.click();
+		invoiceQtyField.sendKeys(invoiceQty);
+	}
+
+	public void enterReceivedQuantity(String receivedQty) {
+		WaitHelper.waitForClickable(driver, receivedQtyField, 10);
+		receivedQtyField.click();
+		receivedQtyField.sendKeys(receivedQty);
+	}
+
+	public void enterAcceptedQuantity(String acceptedQty) {
+		WaitHelper.waitForClickable(driver, acceptedQtyField, 10);
+		acceptedQtyField.click();
+		acceptedQtyField.sendKeys(acceptedQty);
+	}
+
+	public void enterRemark(String remark) {
+		WaitHelper.waitForClickable(driver, remarkField, 10);
+		remarkField.click();
+		remarkField.sendKeys(remark);
+	}
+
+	public void clickUpdateButton() {
+		WaitHelper.waitForClickable(driver, updateButton, 10);
+		updateButton.click();
+	}
+
+	public void extractTotalNetAmount() {
+		try {
+			WaitHelper.waitForVisible(driver, netvalueWholeText, 10);
+			String compText = netvalueWholeText.getText();
+			String part[] = compText.split(":");
+			// String netAmount =part[1];
+
+			String netAmount = "";
+
+			// If contains colon, extract value after colon
+			if (compText.contains(":")) {
+				netAmount = compText.substring(compText.indexOf(":") + 1).trim();
+			} else {
+				// Fallback: extract last word (numbers usually at end)
+				String[] parts = compText.split(" ");
+				netAmount = parts[parts.length - 1].trim();
+			}
+
+			// logger.info("Extracted Net Amount: {}", netAmount);
+			System.out.println("netAmount in page class:" + netAmount);
+
+			WaitHelper.waitForClickable(driver, grnInfoTab, 10);
+			grnInfoTab.click();
+			WaitHelper.waitForClickable(driver, invoiceValueGrnInfoTab, 10);
+			invoiceValueGrnInfoTab.click();
+			invoiceValueGrnInfoTab.sendKeys(netAmount);
+			System.out.println("netAmount:" + netAmount);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	public String extractGrnNoCreated() {
+		WaitHelper.waitForVisible(driver, listingGrnNo, 10);
+		String grnNo = listingGrnNo.getText();
+		System.out.println("grnNo:" + grnNo);
+		return grnNo;
+	}
+
+	public String extractListingPageHeading() {
+		return listingPageHeader.getText().trim();
+	}
+
+//public void enterInvoiceValueGrnInfoTab() {
+	// String netAmount =extractTotalNetAmount();
+
+//}
+
+	public WebElement getListingPageHeader() {
+		return listingPageHeader;
+	}
+
+	public void setListingPageHeader(WebElement listingPageHeader) {
+		this.listingPageHeader = listingPageHeader;
+	}
+
+	public void clickSubmitButton() {
+		WaitHelper.waitForClickable(driver, submitButton, 10);
+		submitButton.click();
+	}
+
+	public String extractSubmitSuccMessage() {
+		WaitHelper.waitForVisible(driver, submitSuccMsg, 10);
+		String succMsg = submitSuccMsg.getText();
+		System.out.println("succMsg:" + succMsg);
+		return succMsg;
+	}
+
+	public void clickResetButton() {
+		WaitHelper.waitForClickable(driver, resetButton, 10);
+		resetButton.click();
+		WaitHelper.waitForVisible(driver, confirmationPopup, 10);
+		WaitHelper.waitForClickable(driver, confOkButton, 10);
+		confOkButton.click();
+	}
+
+	
+	public void openGRNFormDirectly() {
+		logger.info("Waiting for invisibility of dotSpinner.");
+		WaitHelper.waitForInvisibilityOfElementLocated(driver, dotSpinner, 20);
+		
+		logger.info("===== Starting GRN Flow Execution, waiting and clicking store link  =====");	
+		WaitHelper.waitForClickable(driver, storeLink, 10);
+		storeLink.click();
+		
+		WaitHelper.waitForClickable(driver, goodReceiptNoteFormLink, 10);
+		clickGrnLink();
+		logger.info("Opened Good Receipt Note form");
+
+		logger.info("Waiting for invisibility of dotspinner.");
+		WaitHelper.waitForInvisibilityOfElementLocated(driver, dotSpinner, 10);
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+//Getter & Setters
+
+	public WebElement getStoreLink() {
+		return storeLink;
+	}
+
+	public void setStoreLink(WebElement storeLink) {
+		this.storeLink = storeLink;
+	}
+
+	public WebElement getGoodReceiptNoteFormLink() {
+		return goodReceiptNoteFormLink;
+	}
+
+	public void setGoodReceiptNoteFormLink(WebElement goodReceiptNoteFormLink) {
+		this.goodReceiptNoteFormLink = goodReceiptNoteFormLink;
+	}
+
+	public WebElement getCreateNewButton() {
+		return createNewButton;
+	}
+
+	public void setCreateNewButton(WebElement createNewButton) {
+		this.createNewButton = createNewButton;
+	}
+
+	public By getVendorDropField() {
+		return vendorDropField;
+	}
+
+	public void setVendorDropList(By vendorDropField) {
+		this.vendorDropField = vendorDropField;
+	}
+
+	public WebElement getPoNoDropList() {
+		return poNoDropList;
+	}
+
+	public void setPoNoDropList(WebElement poNoDropList) {
+		this.poNoDropList = poNoDropList;
+	}
+
+	public WebElement getPoNoSearchPopup() {
+		return poNoSearchPopup;
+	}
+
+	public void setPoNoSearchPopup(WebElement poNoSearchPopup) {
+		this.poNoSearchPopup = poNoSearchPopup;
+	}
+
+	public WebElement getPoOptionCheckbox() {
+		return poOptionCheckbox;
+	}
+
+	public void setPoOptionCheckbox(WebElement poOptionCheckbox) {
+		this.poOptionCheckbox = poOptionCheckbox;
+	}
+
+	public WebElement getFetchDataButton() {
+		return fetchDataButton;
+	}
+
+	public void setFetchDataButton(WebElement fetchDataButton) {
+		this.fetchDataButton = fetchDataButton;
+	}
+
+	public WebElement getGrnInfoTab() {
+		return grnInfoTab;
+	}
+
+	public void setGrnInfoTab(WebElement grnInfoTab) {
+		this.grnInfoTab = grnInfoTab;
+	}
+
+	public WebElement getTransporterMode() {
+		return transporterMode;
+	}
+
+	public void setTransporterMode(WebElement transporterMode) {
+		this.transporterMode = transporterMode;
+	}
+
+	public WebElement getLrNoField() {
+		return lrNoField;
+	}
+
+	public void setLrNo(WebElement lrNo) {
+		this.lrNoField = lrNoField;
+	}
+
+	public WebElement getLrDate() {
+		return lrDateField;
+	}
+
+	public void setLrDate(WebElement lrDate) {
+		this.lrDateField = lrDateField;
+	}
+
+	public WebElement getInvoiceNoField() {
+		return invoiceNoField;
+	}
+
+	public void setInvoiceNo(WebElement invoiceNo) {
+		this.invoiceNoField = invoiceNoField;
+	}
+
+	public WebElement getInvoiceDate() {
+		return invoiceDateField;
+	}
+
+	public void setInvoiceDate(WebElement invoiceDate) {
+		this.invoiceDateField = invoiceDateField;
+	}
+
+	public WebElement getGrnDetailsTab() {
+		return grnDetailsTab;
+	}
+
+	public void setGrnDetailsTab(WebElement grnDetailsTab) {
+		this.grnDetailsTab = grnDetailsTab;
+	}
+
+	public WebElement getEditIcon() {
+		return editIcon;
+	}
+
+	public void setEditIcon(WebElement editIcon) {
+		this.editIcon = editIcon;
+	}
+
+	public WebElement getGrnPoTab() {
+		return grnPoTab;
+	}
+
+	public void setGrnPoTab(WebElement grnPoTab) {
+		this.grnPoTab = grnPoTab;
+	}
+
+	public WebElement getInvoiceQty() {
+		return invoiceQtyField;
+	}
+
+	public void setInvoiceQty(WebElement invoiceQty) {
+		this.invoiceQtyField = invoiceQtyField;
+	}
+
+	public WebElement getReceivedQty() {
+		return receivedQtyField;
+	}
+
+	public void setReceivedQty(WebElement receivedQty) {
+		this.receivedQtyField = receivedQtyField;
+	}
+
+	public WebElement getAcceptedQty() {
+		return acceptedQtyField;
+	}
+
+	public void setAcceptedQty(WebElement acceptedQty) {
+		this.acceptedQtyField = acceptedQtyField;
+	}
+
+	public WebElement getUpdateButton() {
+		return updateButton;
+	}
+
+	public void setUpdateButton(WebElement updateButton) {
+		this.updateButton = updateButton;
+	}
+
+	public WebElement getNetvalueWholeText() {
+		return netvalueWholeText;
+	}
+
+	public void setNetvalueWholeText(WebElement netvalueWholeText) {
+		this.netvalueWholeText = netvalueWholeText;
+	}
+
+	public WebElement getInvoiceValueGrnInfoTab() {
+		return invoiceValueGrnInfoTab;
+	}
+
+	public void setInvoiceValueGrnInfoTab(WebElement invoiceValueGrnInfoTab) {
+		this.invoiceValueGrnInfoTab = invoiceValueGrnInfoTab;
+	}
+
+	public WebElement getSubmitButton() {
+		return submitButton;
+	}
+
+	public void setSubmitButton(WebElement submitButton) {
+		this.submitButton = submitButton;
+	}
+
+	public WebElement getListingGrnNo() {
+		return listingGrnNo;
+	}
+
+	public void setListingGrnNo(WebElement listingGrnNo) {
+		this.listingGrnNo = listingGrnNo;
+	}
+
+	public WebElement getListingTitle() {
+		return listingTitle;
+	}
+
+	public void setListingTitle(WebElement listingTitle) {
+		this.listingTitle = listingTitle;
+	}
+
+	public WebElement getSubmitSuccMsg() {
+		return submitSuccMsg;
+	}
+
+	public void setSubmitSuccMsg(WebElement submitSuccMsg) {
+		this.submitSuccMsg = submitSuccMsg;
+	}
+
+	public WebElement getSelVendorField() {
+		return selVendorField;
+	}
+
+	public void setSelVendorField(WebElement selVendorField) {
+		this.selVendorField = selVendorField;
+	}
+
+	public WebElement getSelPoNoField() {
+		return selPoNoField;
+	}
+
+	public WebElement getResetButton() {
+		return resetButton;
+	}
+
+	public void setResetButton(WebElement resetButton) {
+		this.resetButton = resetButton;
+	}
+
+	public WebElement getConfirmationPopup() {
+		return confirmationPopup;
+	}
+
+	public void setConfirmationPopup(WebElement confirmationPopup) {
+		this.confirmationPopup = confirmationPopup;
+	}
+
+	public WebElement getConfOkButton() {
+		return confOkButton;
+	}
+
+	public void setConfOkButton(WebElement confOkButton) {
+		this.confOkButton = confOkButton;
+	}
+
+	public WebElement getGrid() {
+		return grid;
+	}
+
+	public WebElement getBackButton() {
+		return backButton;
+	}
+
+	public By getVendorDropOptField() {
+		return vendorDropOptField;
+	}
+
+	
+}

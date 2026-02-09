@@ -1,0 +1,10 @@
+1)To validate all active series options list are coming properly in the series drop down list.
+2)To validate PO Type Drop down list(direct,Indent PO,Quotation PO)
+3)To validate that all fields should be dective until series fied is selected.
+4)To validate -Party drop down list properly-to validate party code,type of party needed to be.
+5)To validate the record created properly in database (in case of save/submit)
+6)To validate record is updated properly in database rep table (in case of update)
+7)To validate On ui record created properly
+8)To validate record is updated properly
+9)To validate all options of dropdown list are getting properly shown on UI or not through res database table.
+10)To

@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite >
+<suite name="Full System Suite">
+ <!--listeners>
+    <listener class-name="UtilityClasses.TestListener" />
+  </listeners !-->	
+	
+<!-- test name="Tax Invoice Test">
+  <classes>
+  <class name="Test.salesModuleTests.masterTests.PartyMasterTest"></class>
+  </classes>
+  </test!-->	
+	
+	
+ <!--test name="sales module">
+    <classes>
+    <class name="Test.salesModuleTests.PartyMasterTest"/>       
+    </classes>
+  </test !-->
+
+ <!--test name="PurchaseOrderTest">
+    <classes>
+    <class name="Test.inventoryModuleTests.PurchaseOrderTest"/>       
+    </classes>
+  </test!-->	
+  
+   <!--test name="SalesDispatchTest">
+    <classes>
+    <class name="Test.salesModuleTests.transTest.SalesDispatchTest"/>       
+    </classes>
+  </test !-->
+  
+  
+  <!--test name="MultiSaleOrderTest">
+    <classes>
+    <class name="Test.salesModuleTests.transTest.MultiSaleOrderTest"/>       
+    </classes>
+  </test !-->	
+  
+  
+  <!--test name="Tax Invoice Test">
+  <classes>
+  <class name="Test.salesModuleTests.transTest.TaxInvoiceTest"></class>
+  </classes>
+  </test !-->
+  
+  
+    <!-- test name="Sales Flow Only">
+        <groups>
+            <run>
+                <include name="sales-flow"/>
+            </run>
+        </groups>
+        <classes>           
+            <class name="Test.flowWiseTest.E2EFlowTests"/>          
+        </classes>
+    </test!-->
+    
+    
+     <!--test name="Inventory Flow Only">
+        <groups>
+            <run>
+                <include name="Inventory-flow"/>
+            </run>
+        </groups>
+        <classes>         
+            <class name="Test.flowWiseTest.InventoryFlowTests"/>          
+        </classes>
+    </test!-->
+    
+    
+     <test name="po Test">
+  <classes>
+  <class name="Test.inventoryModuleTests.masterTests.PurchaseOrderTest"></class>
+  </classes>
+  </test >
+  
+</suite>
+

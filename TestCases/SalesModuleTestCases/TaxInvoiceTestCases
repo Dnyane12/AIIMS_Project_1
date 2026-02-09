@@ -1,0 +1,11 @@
+1)To validate that on selection of dispatch number-->auto poppulation of route and vehicle number and also verify that 
+the vehicle number is disabled also.
+2)and validate that generate tax  invoice button should get enabled or not after selction of dispatch number. and disabled o=all other time, 
+if dispatch number is not seelcted
+3)Validate that series and doc type is by default selected and disabled on opening the tax invoice form.
+4)Validate that the proper dispatch data is being getting fetched or poppulated on clicking the generate tax invoice button.
+5)validate the view button functinality along with exact correct scheme and dispatch data is being shown or not
+6)Validate remark field and its characteristics
+7)validate reset functionality
+8)validate submit functionality
+9)validate the tax invoice report

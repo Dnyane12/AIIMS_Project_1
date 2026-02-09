@@ -1,0 +1,19 @@
+1)To validate all options are proper in the drop down present in the forms.
+2)To test proper gst tax % are getting popullated ones HSN code is selected.(functional,priority)
+3)To check all mandetory fields validation(functional,priority)
+4)To validate Number fields are accepting negetive numbers or not.
+5)To validate there is no duplicate options are present in the drop downs
+6)To check proper codes(like HSN code,stock acc code,etc are coming in the drop downs)
+7)To validate that inactive options are not coming in the dropdowns.
+8)To validate that dependent fields are working properly.(functional,priority)
+9)To validate that the is active field is by default selected(functional,priority)
+10)To validate that the department wise store locations are coming or not.(function,priority)
+11)To validate the functionality of cost center field.
+12)To validate the flags and there impacts in further flow. (functional,priority)
+13)Number field should not accept charector values. 
+14)Print-Names fields default poppulation value validation.
+15)To validate that ,without selecting the department,we shouls not be able to 
+navigate to the Store Location tab.(functional,priority)
+16)To validate the functionality of BAck button,reset button,draft button and submit button (functional,priority)
+17)To validate the edit/update functionality.(functional,priority)
+

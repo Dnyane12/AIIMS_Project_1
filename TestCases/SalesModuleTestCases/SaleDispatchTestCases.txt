@@ -1,0 +1,21 @@
+1)create sale dispatch button should not be enabled by default ,it should be enabled only when grid record is selected.
+2)To check display of scheme labels on party name in case if scheme is applied to the party.
+3)To validate the display of free label on free item ,if discount(free item)scheme is applied there.
+4)To validate Details tab popup data.
+5)To check in case of free item the single item is displayed under the loose header and there
+ should be zero quantity in crate header for free item.
+6)For free item order quantity displayed should be zero.
+7)If in case the stock available for the item in sale dispatch is zero or less than order quantity --->
+and the user want to increase the stock for that item through opening stock entry ,do it--->
+then recheck the same item stock available now in sale dispatch screen
+8)To validate the correct sale order data is being displayed on sale dispatch screen. it can be validated against multi sale order report.
+9)Validate dispatch quantity should not be greater than stock available quantity.
+10)validate auto population of route ,vehical no and dispatch date,doctype ,series and LR date ,after clicking create saleDispatchButton 
+and where,docType,series and LR date should be disabled by default. 
+11)Validate that after clicking createSaleDispatchButton it should navigate to  page with heading "Sale Dispatch / Create"
+12)If any of the item doesnt have stock available and ,we are still trying to save the sale dispatch--->
+then check that on submit it should show error message for "Batch detail not available for item SARVOTTAM 6000ML [A02-SAO-25-0114838]"
+13)validate dispaly of indicators "Zero (0) Stock /Dispatch Qty." and "Stock Less Than Order Qty."
+14)validate reset functionality
+15)validate submit functionality
+16)validate dispatch quantity should not be greater than order quantity.

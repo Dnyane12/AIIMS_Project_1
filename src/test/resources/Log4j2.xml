@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN">
+    <Appenders>
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
+        </Console>
+         <RollingFile name="FileLogger"
+                     fileName="logs/testlog.log"
+                     filePattern="logs/testlog-%d{yyyy-MM-dd-HH-mm}-%i.log.gz">
+            <PatternLayout pattern="%d %p %c{1.} [%t] %m%n"/>
+            
+            <Policies>
+                <!-- Rotate when file size exceeds 5MB -->
+                <SizeBasedTriggeringPolicy size="100KB"/>
+                
+                <!-- Rotate on app startup -->
+                <OnStartupTriggeringPolicy/>
+                
+                <!-- Optional: Rotate daily -->
+                <!-- <TimeBasedTriggeringPolicy interval="1"/> -->
+            </Policies>
+
+            <DefaultRolloverStrategy max="10"/>
+        </RollingFile>
+    </Appenders>
+
+    <Loggers>
+        <Root level="debug">
+           // <AppenderRef ref="Console"/>
+            <AppenderRef ref="FileLogger"/>
+        </Root>
+    </Loggers>
+</Configuration>

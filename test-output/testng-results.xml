@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results ignored="5" total="6" passed="1" failed="0" skipped="0">
+  <reporter-output>
+  </reporter-output>
+  <suite started-at="2026-02-09T14:06:58 IST" name="Full System Suite" finished-at="2026-02-09T14:07:19 IST" duration-ms="21226">
+    <groups>
+    </groups>
+    <test started-at="2026-02-09T14:06:58 IST" name="po Test" finished-at="2026-02-09T14:07:19 IST" duration-ms="21226">
+      <class name="Test.inventoryModuleTests.masterTests.PurchaseOrderTest">
+        <test-method is-config="true" signature="basicSetting()[pri:0, instance:Test.inventoryModuleTests.masterTests.PurchaseOrderTest@6f2cfcc2]" started-at="2026-02-09T14:06:58 IST" name="basicSetting" finished-at="2026-02-09T14:07:00 IST" duration-ms="1769" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- basicSetting -->
+        <test-method is-config="true" signature="objInitilization()[pri:0, instance:Test.inventoryModuleTests.masterTests.PurchaseOrderTest@6f2cfcc2]" started-at="2026-02-09T14:07:00 IST" name="objInitilization" finished-at="2026-02-09T14:07:07 IST" duration-ms="7294" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- objInitilization -->
+        <test-method signature="validatePurchaseOrderCreation()[pri:0, instance:Test.inventoryModuleTests.masterTests.PurchaseOrderTest@6f2cfcc2]" started-at="2026-02-09T14:07:07 IST" name="validatePurchaseOrderCreation" finished-at="2026-02-09T14:07:19 IST" duration-ms="12128" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- validatePurchaseOrderCreation -->
+      </class> <!-- Test.inventoryModuleTests.masterTests.PurchaseOrderTest -->
+    </test> <!-- po Test -->
+  </suite> <!-- Full System Suite -->
+</testng-results>
