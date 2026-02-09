@@ -19,7 +19,7 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
-import base.SetUp;
+import Test.setUpTests.SetUp;
 import flowPack.salesModuleFlow.transactionFlow.MultiSaleOrderFlow;
 import model.SaleOrderDBModel;
 import pageObjects.sales.transaction.MultiSaleOrderPage;

@@ -6,7 +6,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import Test.inventoryModuleTests.transactionTests.GoodReceiptNoteTest;
-import base.SetUp;
+import Test.setUpTests.SetUp;
 import flowPack.inventoryModuleFlow.masterFlow.PurchaseOrderFlow;
 import flowPack.inventoryModuleFlow.transactionFlow.GRNPostingFlow;
 import flowPack.inventoryModuleFlow.transactionFlow.GRNPrintingFlow;

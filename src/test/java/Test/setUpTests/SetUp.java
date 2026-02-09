@@ -1,4 +1,4 @@
-package base;
+package Test.setUpTests;
 
 import java.time.Duration;
 import java.util.HashMap;

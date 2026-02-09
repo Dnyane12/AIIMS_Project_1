@@ -16,7 +16,7 @@ import org.testng.annotations.BeforeMethod;
     import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
-import base.SetUp;
+import Test.setUpTests.SetUp;
 import flowPack.inventoryModuleFlow.masterFlow.ItemMasterFlow;
 import flowPack.setUpFlow.HomeFlow;
 import flowPack.setUpFlow.LoginFlow;

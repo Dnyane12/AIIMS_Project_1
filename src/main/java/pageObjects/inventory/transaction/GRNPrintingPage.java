@@ -5,11 +5,9 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-
-import base.SetUp;
 import utils.WaitHelper;
 
-public class GRNPrintingPage {
+public class GRNPrintingPage{
 WebDriver driver;
 	
 public GRNPrintingPage(WebDriver driver) {
@@ -76,16 +74,16 @@ public void clickPrintIcon1() {
 	printIcon.click();	
 	
 	// Wait for new tab/window with PDF
-    WaitHelper.waitForNumberOfWindowsToBe(SetUp.driver, 2, 10);
-    
-    // Switch to PDF tab
-    String mainWindow = SetUp.driver.getWindowHandle();
-    for (String windowHandle : SetUp.driver.getWindowHandles()) {
-        if (!windowHandle.equals(mainWindow)) {
-            SetUp.driver.switchTo().window(windowHandle);
-            break;
-        }
-    }
+//    WaitHelper.waitForNumberOfWindowsToBe(SetUp.driver, 2, 10);
+//    
+//    // Switch to PDF tab
+//    String mainWindow = SetUp.driver.getWindowHandle();
+//    for (String windowHandle : SetUp.driver.getWindowHandles()) {
+//        if (!windowHandle.equals(mainWindow)) {
+//            SetUp.driver.switchTo().window(windowHandle);
+//            break;
+//        }
+//    }
 }
 	
 

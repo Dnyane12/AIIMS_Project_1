@@ -7,7 +7,7 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
-import base.SetUp;
+import Test.setUpTests.SetUp;
 import flowPack.inventoryModuleFlow.transactionFlow.PurchaseReturnFlow;
 import pageObjects.inventory.transaction.PurchaseReturnPage;
 import utils.PropertyReader;

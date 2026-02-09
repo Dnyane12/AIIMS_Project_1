@@ -4,7 +4,7 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-import base.SetUp;
+import Test.setUpTests.SetUp;
 import flowPack.inventoryModuleFlow.masterFlow.InvPartyMasterFlow;
 
 

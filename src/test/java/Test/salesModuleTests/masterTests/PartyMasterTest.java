@@ -9,7 +9,7 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-import base.SetUp;
+import Test.setUpTests.SetUp;
 import flowPack.salesModuleFlow.masterFlow.SPartyMasterFlow;
 import flowPack.setUpFlow.HomeFlow;
 import flowPack.setUpFlow.LoginFlow;

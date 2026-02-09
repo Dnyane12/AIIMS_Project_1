@@ -8,7 +8,7 @@ import org.testng.annotations.Test;
 
 import Test.salesModuleTests.masterTests.PartyMasterTest;
 import Test.setUpTests.LoginTest;
-import base.SetUp;
+import Test.setUpTests.SetUp;
 import flowPack.inventoryModuleFlow.masterFlow.ItemMasterFlow;
 import flowPack.salesModuleFlow.masterFlow.PricelistLinkingFlow;
 import flowPack.salesModuleFlow.masterFlow.SPartyMasterFlow;

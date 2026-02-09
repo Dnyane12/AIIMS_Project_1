@@ -6,7 +6,7 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import Test.setUpTests.BaseClassTest;
+
 import pageObjects.setup.LoginPage;
 import utils.PropertyReader;
 

@@ -6,7 +6,6 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-import base.SetUp;
 import flowPack.setUpFlow.LoginFlow;
 import pageObjects.setup.LoginPage;
 import utils.WaitHelper;

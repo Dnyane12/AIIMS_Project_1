@@ -5,7 +5,7 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
-import base.SetUp;
+import Test.setUpTests.SetUp;
 import flowPack.salesModuleFlow.transactionFlow.TaxInvoiceFlow;
 import pageObjects.sales.transaction.TaxInvoicePage;
 

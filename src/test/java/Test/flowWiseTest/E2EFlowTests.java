@@ -6,7 +6,7 @@ import org.testng.annotations.Test;
 import Test.salesModuleTests.transTest.MultiSaleOrderTest;
 import Test.salesModuleTests.transTest.SalesDispatchTest;
 import Test.salesModuleTests.transTest.TaxInvoiceTest;
-import base.SetUp;
+import Test.setUpTests.SetUp;
 import flowPack.salesModuleFlow.transactionFlow.MultiSaleOrderFlow;
 import flowPack.salesModuleFlow.transactionFlow.SaleDispatchFlow;
 import flowPack.salesModuleFlow.transactionFlow.TaxInvoiceFlow;

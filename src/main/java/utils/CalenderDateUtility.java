@@ -9,9 +9,9 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import base.SetUp;
 
-public class CalenderDateUtility extends SetUp {
+
+public class CalenderDateUtility {
 
     private static void selectDate(WebDriver driver, String day, String month, String year, String labelText) {
         try {

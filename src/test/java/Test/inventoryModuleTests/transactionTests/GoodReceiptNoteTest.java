@@ -14,7 +14,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
-import base.SetUp;
+import Test.setUpTests.SetUp;
 import flowPack.inventoryModuleFlow.transactionFlow.GoodReceiptNoteFlow;
 import pageObjects.inventory.transaction.GoodReceiptNotePage;
 import utils.PropertyReader;

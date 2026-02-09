@@ -15,7 +15,7 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
-import base.SetUp;
+import Test.setUpTests.SetUp;
 import flowPack.salesModuleFlow.transactionFlow.SaleDispatchFlow;
 import helpers.salesModule.SaleOrderDBHelper;
 import model.DispatchStockColorRow;
@@ -23,7 +23,7 @@ import model.SaleOrderDBModel;
 import pageObjects.sales.transaction.SaleDispatchPage;
 import utils.DatabaseUtility;
 import utils.PropertyReader;
-import utils.UtilityToValiStockAvailableForItem;
+//import utils.UtilityToValiStockAvailableForItem;
 import utils.WaitHelper;
 
 public class SalesDispatchTest extends SetUp {
@@ -222,7 +222,7 @@ public class SalesDispatchTest extends SetUp {
 	
 	@Test(enabled = false)
 	private void validateStockAvailableForItem(String itemName, String expectedStock) {
-		UtilityToValiStockAvailableForItem.validateStockAvailableForItem(itemName, expectedStock);
+		//UtilityToValiStockAvailableForItem.validateStockAvailableForItem(itemName, expectedStock);
 	}
 
 	

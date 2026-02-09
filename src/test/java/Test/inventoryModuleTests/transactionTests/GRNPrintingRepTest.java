@@ -3,7 +3,7 @@ package Test.inventoryModuleTests.transactionTests;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-import base.SetUp;
+import Test.setUpTests.SetUp;
 import flowPack.inventoryModuleFlow.transactionFlow.GRNPrintingFlow;
 import pageObjects.inventory.transaction.GRNPrintingPage;
 import utils.PropertyReader;

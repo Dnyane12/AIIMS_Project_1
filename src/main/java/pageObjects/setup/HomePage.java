@@ -11,7 +11,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
-import base.SetUp;
+
 import pageObjects.sales.master.SPartyMasterPage;
 import utils.WaitHelper;
 
