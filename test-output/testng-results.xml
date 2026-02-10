@@ -1,25 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testng-results ignored="5" total="6" passed="1" failed="0" skipped="0">
+<testng-results ignored="8" total="10" passed="2" failed="0" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2026-02-09T14:06:58 IST" name="Full System Suite" finished-at="2026-02-09T14:07:19 IST" duration-ms="21226">
+  <suite started-at="2026-02-10T17:49:06 IST" name="Full System Suite" finished-at="2026-02-10T17:50:23 IST" duration-ms="76824">
     <groups>
+      <group name="Inventory-flow">
+        <method signature="InventoryFlowTests.validatePurchaseOrderCreation()[pri:0, instance:Test.flowWiseTest.InventoryFlowTests@55562aa9]" name="validatePurchaseOrderCreation" class="Test.flowWiseTest.InventoryFlowTests"/>
+        <method signature="InventoryFlowTests.validateGRNCreation()[pri:1, instance:Test.flowWiseTest.InventoryFlowTests@55562aa9]" name="validateGRNCreation" class="Test.flowWiseTest.InventoryFlowTests"/>
+      </group> <!-- Inventory-flow -->
     </groups>
-    <test started-at="2026-02-09T14:06:58 IST" name="po Test" finished-at="2026-02-09T14:07:19 IST" duration-ms="21226">
-      <class name="Test.inventoryModuleTests.masterTests.PurchaseOrderTest">
-        <test-method is-config="true" signature="basicSetting()[pri:0, instance:Test.inventoryModuleTests.masterTests.PurchaseOrderTest@6f2cfcc2]" started-at="2026-02-09T14:06:58 IST" name="basicSetting" finished-at="2026-02-09T14:07:00 IST" duration-ms="1769" status="PASS">
+    <test started-at="2026-02-10T17:49:06 IST" name="Inventory Flow Only" finished-at="2026-02-10T17:50:23 IST" duration-ms="76824">
+      <class name="Test.flowWiseTest.InventoryFlowTests">
+        <test-method is-config="true" signature="basicSetting()[pri:0, instance:Test.flowWiseTest.InventoryFlowTests@55562aa9]" started-at="2026-02-10T17:49:06 IST" name="basicSetting" finished-at="2026-02-10T17:49:08 IST" duration-ms="1731" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- basicSetting -->
-        <test-method is-config="true" signature="objInitilization()[pri:0, instance:Test.inventoryModuleTests.masterTests.PurchaseOrderTest@6f2cfcc2]" started-at="2026-02-09T14:07:00 IST" name="objInitilization" finished-at="2026-02-09T14:07:07 IST" duration-ms="7294" status="PASS">
+        <test-method is-config="true" signature="compInvFlow()[pri:0, instance:Test.flowWiseTest.InventoryFlowTests@55562aa9]" started-at="2026-02-10T17:49:08 IST" name="compInvFlow" finished-at="2026-02-10T17:49:08 IST" duration-ms="70" status="PASS">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- objInitilization -->
-        <test-method signature="validatePurchaseOrderCreation()[pri:0, instance:Test.inventoryModuleTests.masterTests.PurchaseOrderTest@6f2cfcc2]" started-at="2026-02-09T14:07:07 IST" name="validatePurchaseOrderCreation" finished-at="2026-02-09T14:07:19 IST" duration-ms="12128" status="PASS">
+        </test-method> <!-- compInvFlow -->
+        <test-method signature="validatePurchaseOrderCreation()[pri:0, instance:Test.flowWiseTest.InventoryFlowTests@55562aa9]" started-at="2026-02-10T17:49:08 IST" name="validatePurchaseOrderCreation" finished-at="2026-02-10T17:50:02 IST" duration-ms="53919" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- validatePurchaseOrderCreation -->
-      </class> <!-- Test.inventoryModuleTests.masterTests.PurchaseOrderTest -->
-    </test> <!-- po Test -->
+        <test-method signature="validateGRNCreation()[pri:1, instance:Test.flowWiseTest.InventoryFlowTests@55562aa9]" started-at="2026-02-10T17:50:02 IST" name="validateGRNCreation" finished-at="2026-02-10T17:50:23 IST" duration-ms="21059" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- validateGRNCreation -->
+      </class> <!-- Test.flowWiseTest.InventoryFlowTests -->
+    </test> <!-- Inventory Flow Only -->
   </suite> <!-- Full System Suite -->
 </testng-results>

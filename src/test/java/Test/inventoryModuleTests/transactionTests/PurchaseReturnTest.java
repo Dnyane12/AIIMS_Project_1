@@ -206,14 +206,14 @@ public class PurchaseReturnTest extends SetUp{
 	
 	
 	//Test to validate PRN quantities like accepted quantity,invoice qty ,rej qty ,etc.
-	@Test
+	@Test(enabled= false)
 	public void validateAllQtyOfPRN() {
 		//return from store qty should not be greater than  prn accepted qty.
 	}
 	
 	
 	//Test to validate mandetory fields.
-	@Test
+	@Test(enabled= false)
 	public void validateMandetoryFields() {
 		
 	}

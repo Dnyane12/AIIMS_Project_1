@@ -27,7 +27,7 @@ public class SetUp {
     @BeforeClass(alwaysRun = true)
     public void basicSetting() {
     	try {
-    		logger.info("calling basicSetting(), @Before Method in SetUp class");
+    		logger.info("calling basicSetting(),@BeforeClass in SetUp class");
     		prop = new PropertyReader("InventoryModule/application.properties");
     		System.out.println("prop:"+prop);
     	

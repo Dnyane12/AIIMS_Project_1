@@ -48,8 +48,8 @@ public class HomeFlow {
 			homePage.getInventoryMod().click();
 			
 			logger.info("ing and clicking store link");
-			WaitHelper.waitForClickable(driver,homePage.getStoreLink(), 10);
-			homePage.getStoreLink().click();		
+			WaitHelper.waitForInvisibilityOfElementLocated(driver, homePage.getDotSpinner(), 10);
+			WaitHelper.waitForRefreshAndClick(driver, homePage.getStoreLink(), 10);	
 		}	
 		
 		

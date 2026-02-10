@@ -4,6 +4,7 @@ import java.util.List;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -33,8 +34,24 @@ public class GoodReceiptNoteFlow {
 	
 	
 	public void prepareEnvToDirectlyOpenGRNForm() {
-		logger.info("calling openGRNFormDirectly() method in GRN Flow class.");
-		grnPage.openGRNFormDirectly();
+		logger.info("calling openGRNFormDirectly() method in GRN Flow class.");	
+			logger.info("Waiting for invisibility of dotSpinner.");
+			
+			WaitHelper.waitForInvisibilityOfElementLocated(driver,grnPage.getDotSpinner(), 20);
+			WaitHelper.waitForClickable(driver, grnPage.getStoreLink(), 20);
+			
+			JavascriptExecutor js = (JavascriptExecutor) driver;
+    	    js.executeScript("arguments[0].scrollIntoView({block: 'center', inline: 'nearest'});", grnPage.getStoreLink());
+			js.executeScript("arguments[0].click()", grnPage.getStoreLink());
+			
+			
+			WaitHelper.waitForClickable(driver, grnPage.getGoodReceiptNoteFormLink(), 10);
+			grnPage.clickGrnLink();
+			logger.info("Opened Good Receipt Note form");
+
+			logger.info("Waiting for invisibility of dotspinner.");
+			WaitHelper.waitForInvisibilityOfElementLocated(driver, grnPage.getDotSpinner(), 10);
+		
 	}
 		
 
@@ -48,11 +65,12 @@ public class GoodReceiptNoteFlow {
 		logger.info("Step 2: Navigating to Inventory → Store → GRN");
 		homeFlow.clickInvModAndStoreLink();
 
+	
 		grnPage.clickGrnLink();
 		logger.info("Opened Good Receipt Note form");
 
-		logger.info("waiting for invisibility of dotspinner.");
-		WaitHelper.waitForInvisibilityOfElementLocated(driver, grnPage.getDotSpinner(), 10);
+		//logger.info("waiting for invisibility of dotspinner.");
+		//WaitHelper.waitForInvisibilityOfElementLocated(driver, grnPage.getDotSpinner(), 10);
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
@@ -60,10 +78,9 @@ public class GoodReceiptNoteFlow {
 
 	
 	// Method to execute GRN Flow OR create GRN
-	public void executeGrnFlow(String poNo) {
+	public String executeGrnFlow(String poNo) {
 		try {
-		WaitHelper.waitForInvisibilityOfElementLocated(driver, grnPage.getDotSpinner(), 10);	
-		WaitHelper.waitForClickable(driver, grnPage.getCreateNewButton(), 10);
+		//WaitHelper.waitForInvisibilityOfElementLocated(driver, grnPage.getDotSpinner(), 10);	
 		grnPage.clickCreateNewButton();
 		logger.info("Clicked Create New button");
 
@@ -82,9 +99,7 @@ public class GoodReceiptNoteFlow {
 		grnPage.clickFetchData();
 		logger.info("Clicked Fetch Data button");
 
-		logger.info("Step 4: Entering GRN Information");
-		WaitHelper.waitForInvisibilityOfElementLocated(driver, grnPage.getDotSpinner(), 10);
-		WaitHelper.waitForClickable(driver, grnPage.getGrnInfoTab(), 10);
+		logger.info("Step 4: Entering GRN Information");		
 		grnPage.clickGrnInfoTab();
 
 		WaitHelper.waitForClickable(driver, grnPage.getTransporterMode(), 10);
@@ -132,13 +147,28 @@ public class GoodReceiptNoteFlow {
 
 		grnPage.clickSubmitButton();
 		logger.info("Clicked Submit button");
-
+		
+		String grnNoCreated= extractGrnNo();
+				
 		logger.info("===== GRN Flow Executed Successfully =====");
+		return grnNoCreated;
 		}catch(Exception e) {
 			e.printStackTrace();
-		}
+			return null;
+		}		
+		
 	}
-
+	
+	public String extractGrnNo() {
+		String compSuccMsg=grnPage.extractGrnNo();
+		String parts[]= compSuccMsg.trim().split("ID:");
+		String grnNo=parts[1];
+		System.out.println("grnNo: "+grnNo);
+		return grnNo;
+	}
+	
+	
+	
 	
 	public void flowUptoPoNoSel() {
 		WaitHelper.waitForClickable(driver, grnPage.getCreateNewButton(), 10);

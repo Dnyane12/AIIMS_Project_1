@@ -53,8 +53,8 @@ public class GRNPostingFlow {
 	
 	
 	//Method to execute GRN posting Flow
-	public String executeGRNPostingFlow() {
-		GRNPostPage.SearchGRNNo(propReader.getProperty("GRNNo"));
+	public String executeGRNPostingFlow(String grnNo) {
+		GRNPostPage.SearchGRNNo(grnNo);
 		GRNPostPage.clickForwordArrowIcon();
 		GRNPostPage.clickPostGRNButton();
 		GRNPostPage.clickSubmitButton();

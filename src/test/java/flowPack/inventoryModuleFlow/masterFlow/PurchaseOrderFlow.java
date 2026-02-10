@@ -52,7 +52,7 @@ public class PurchaseOrderFlow {
 		WaitHelper.waitForInvisibilityOfElementLocated(driver, poPages.getDotSpinner(), 10);
 		WaitHelper.waitForClickable(driver,poPages.getCreateNewButton(), 10);
 		
-		WaitHelper.waitForInvisibilityOfElementLocated(driver, poPages.getDotSpinner(), 10);
+		WaitHelper.waitForInvisibilityOfElementLocated(driver, poPages.getDotSpinner(), 20);
 		poPages.clickCreateNewBtn();
 		
        

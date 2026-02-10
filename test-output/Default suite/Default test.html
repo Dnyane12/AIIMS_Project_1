@@ -57,9 +57,9 @@ function toggleAllBoxes() {
 <tr>
 <td>Tests passed/Failed/Skipped:</td><td>0/1/0</td>
 </tr><tr>
-<td>Started on:</td><td>Mon Feb 09 11:50:53 IST 2026</td>
+<td>Started on:</td><td>Tue Feb 10 17:36:47 IST 2026</td>
 </tr>
-<tr><td>Total time:</td><td>33 seconds (33419 ms)</td>
+<tr><td>Total time:</td><td>54 seconds (54374 ms)</td>
 </tr><tr>
 <td>Included groups:</td><td></td>
 </tr><tr>
@@ -76,14 +76,13 @@ function toggleAllBoxes() {
 <td><b>Instance</b></td>
 </tr>
 <tr>
-<td title='Test.flowWiseTest.InventoryFlowTests.validatePurchaseOrderCreation()'><b>validatePurchaseOrderCreation</b><br>Test class: Test.flowWiseTest.InventoryFlowTests</td>
-<td><div><pre>org.openqa.selenium.TimeoutException: Expected condition failed: waiting for element to be clickable: Proxy element for: DefaultElementLocator &apos;By.xpath: //h3[contains(@class,&apos;custom-font fs-17&apos;) and normalize-space(text())=&apos;Inventory&apos;]&apos; (tried for 10 second(s) with 500 milliseconds interval)
+<td title='Test.flowWiseTest.InventoryFlowTests.validateGRNCreation()'><b>validateGRNCreation</b><br>Test class: Test.flowWiseTest.InventoryFlowTests</td>
+<td><div><pre>org.openqa.selenium.TimeoutException: Expected condition failed: waiting for element to be clickable: Proxy element for: DefaultElementLocator &apos;By.xpath: //igx-nav-drawer//span[contains(@class, &apos;menu-l1-name&apos;) and normalize-space()=&apos;Stores&apos;]&apos; (tried for 50 second(s) with 500 milliseconds interval)
 	at org.openqa.selenium.support.ui.WebDriverWait.timeoutException(WebDriverWait.java:84)
 	at org.openqa.selenium.support.ui.FluentWait.until(FluentWait.java:228)
 	at utils.WaitHelper.waitForClickable(WaitHelper.java:26)
-	at pageObjects.setup.HomePage.clickInventoryModule(HomePage.java:88)
-	at flowPack.inventoryModuleFlow.masterFlow.PurchaseOrderFlow.prapareEnv(PurchaseOrderFlow.java:43)
-	at Test.flowWiseTest.InventoryFlowTests.validatePurchaseOrderCreation(InventoryFlowTests.java:56)
+	at flowPack.inventoryModuleFlow.transactionFlow.GoodReceiptNoteFlow.prepareEnvToDirectlyOpenGRNForm(GoodReceiptNoteFlow.java:41)
+	at Test.flowWiseTest.InventoryFlowTests.validateGRNCreation(InventoryFlowTests.java:74)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -112,15 +111,15 @@ function toggleAllBoxes() {
 	at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:115)
 	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:293)
 	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:91)
-Caused by: org.openqa.selenium.NoSuchElementException: no such element: Unable to locate element: {&quot;method&quot;:&quot;xpath&quot;,&quot;selector&quot;:&quot;//h3[contains(@class,&apos;custom-font fs-17&apos;) and normalize-space(text())=&apos;Inventory&apos;]&quot;}
+Caused by: org.openqa.selenium.NoSuchElementException: no such element: Unable to locate element: {&quot;method&quot;:&quot;xpath&quot;,&quot;selector&quot;:&quot;//igx-nav-drawer//span[contains(@class, &apos;menu-l1-name&apos;) and normalize-space()=&apos;Stores&apos;]&quot;}
   (Session info: chrome=144.0.7559.133)
 For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#no-such-element-exception
 Build info: version: &apos;4.30.0&apos;, revision: &apos;509c7f17cc*&apos;
 System info: os.name: &apos;Windows 10&apos;, os.arch: &apos;amd64&apos;, os.version: &apos;10.0&apos;, java.version: &apos;17.0.11&apos;
 Driver info: org.openqa.selenium.chrome.ChromeDriver
-Command: [351ed1c854cfec151ab678f8fe36a95f, findElement {value=//h3[contains(@class,&apos;custom-font fs-17&apos;) and normalize-space(text())=&apos;Inventory&apos;], using=xpath}]
-Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 144.0.7559.133, chrome: {chromedriverVersion: 143.0.7499.40 (c23ff452476d..., userDataDir: C:\Users\dnare\AppData\Loca...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:49536}, goog:processID: 21524, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), se:cdp: ws://localhost:49536/devtoo..., se:cdpVersion: 144.0.7559.133, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
-Session ID: 351ed1c854cfec151ab678f8fe36a95f
+Command: [b82d1f403bb5b2e64b9055f983903f38, findElement {value=//igx-nav-drawer//span[contains(@class, &apos;menu-l1-name&apos;) and normalize-space()=&apos;Stores&apos;], using=xpath}]
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 144.0.7559.133, chrome: {chromedriverVersion: 143.0.7499.40 (c23ff452476d..., userDataDir: C:\Users\dnare\AppData\Loca...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:51636}, goog:processID: 14540, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), se:cdp: ws://localhost:51636/devtoo..., se:cdpVersion: 144.0.7559.133, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Session ID: b82d1f403bb5b2e64b9055f983903f38
 	at jdk.internal.reflect.GeneratedConstructorAccessor24.newInstance(Unknown Source)
 	at java.base/jdk.internal.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
 	at java.base/java.lang.reflect.Constructor.newInstanceWithCaller(Constructor.java:499)
@@ -138,22 +137,21 @@ Session ID: 351ed1c854cfec151ab678f8fe36a95f
 	at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:362)
 	at org.openqa.selenium.support.pagefactory.DefaultElementLocator.findElement(DefaultElementLocator.java:68)
 	at org.openqa.selenium.support.pagefactory.internal.LocatingElementHandler.invoke(LocatingElementHandler.java:38)
-	at jdk.proxy2/jdk.proxy2.$Proxy27.isDisplayed(Unknown Source)
+	at jdk.proxy2/jdk.proxy2.$Proxy26.isDisplayed(Unknown Source)
 	at org.openqa.selenium.support.ui.ExpectedConditions.elementIfVisible(ExpectedConditions.java:304)
 	at org.openqa.selenium.support.ui.ExpectedConditions$10.apply(ExpectedConditions.java:290)
 	at org.openqa.selenium.support.ui.ExpectedConditions$10.apply(ExpectedConditions.java:287)
 	at org.openqa.selenium.support.ui.ExpectedConditions$23.apply(ExpectedConditions.java:656)
 	at org.openqa.selenium.support.ui.ExpectedConditions$23.apply(ExpectedConditions.java:652)
 	at org.openqa.selenium.support.ui.FluentWait.until(FluentWait.java:203)
-	... 32 more
-</pre></div><a href='#' onClick='toggleBox("stack-trace357153703", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
-<div class='stack-trace' id='stack-trace357153703'><pre>org.openqa.selenium.TimeoutException: Expected condition failed: waiting for element to be clickable: Proxy element for: DefaultElementLocator &apos;By.xpath: //h3[contains(@class,&apos;custom-font fs-17&apos;) and normalize-space(text())=&apos;Inventory&apos;]&apos; (tried for 10 second(s) with 500 milliseconds interval)
+	... 31 more
+</pre></div><a href='#' onClick='toggleBox("stack-trace1933799970", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
+<div class='stack-trace' id='stack-trace1933799970'><pre>org.openqa.selenium.TimeoutException: Expected condition failed: waiting for element to be clickable: Proxy element for: DefaultElementLocator &apos;By.xpath: //igx-nav-drawer//span[contains(@class, &apos;menu-l1-name&apos;) and normalize-space()=&apos;Stores&apos;]&apos; (tried for 50 second(s) with 500 milliseconds interval)
 	at org.openqa.selenium.support.ui.WebDriverWait.timeoutException(WebDriverWait.java:84)
 	at org.openqa.selenium.support.ui.FluentWait.until(FluentWait.java:228)
 	at utils.WaitHelper.waitForClickable(WaitHelper.java:26)
-	at pageObjects.setup.HomePage.clickInventoryModule(HomePage.java:88)
-	at flowPack.inventoryModuleFlow.masterFlow.PurchaseOrderFlow.prapareEnv(PurchaseOrderFlow.java:43)
-	at Test.flowWiseTest.InventoryFlowTests.validatePurchaseOrderCreation(InventoryFlowTests.java:56)
+	at flowPack.inventoryModuleFlow.transactionFlow.GoodReceiptNoteFlow.prepareEnvToDirectlyOpenGRNForm(GoodReceiptNoteFlow.java:41)
+	at Test.flowWiseTest.InventoryFlowTests.validateGRNCreation(InventoryFlowTests.java:74)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -182,15 +180,15 @@ Session ID: 351ed1c854cfec151ab678f8fe36a95f
 	at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:115)
 	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:293)
 	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:91)
-Caused by: org.openqa.selenium.NoSuchElementException: no such element: Unable to locate element: {&quot;method&quot;:&quot;xpath&quot;,&quot;selector&quot;:&quot;//h3[contains(@class,&apos;custom-font fs-17&apos;) and normalize-space(text())=&apos;Inventory&apos;]&quot;}
+Caused by: org.openqa.selenium.NoSuchElementException: no such element: Unable to locate element: {&quot;method&quot;:&quot;xpath&quot;,&quot;selector&quot;:&quot;//igx-nav-drawer//span[contains(@class, &apos;menu-l1-name&apos;) and normalize-space()=&apos;Stores&apos;]&quot;}
   (Session info: chrome=144.0.7559.133)
 For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#no-such-element-exception
 Build info: version: &apos;4.30.0&apos;, revision: &apos;509c7f17cc*&apos;
 System info: os.name: &apos;Windows 10&apos;, os.arch: &apos;amd64&apos;, os.version: &apos;10.0&apos;, java.version: &apos;17.0.11&apos;
 Driver info: org.openqa.selenium.chrome.ChromeDriver
-Command: [351ed1c854cfec151ab678f8fe36a95f, findElement {value=//h3[contains(@class,&apos;custom-font fs-17&apos;) and normalize-space(text())=&apos;Inventory&apos;], using=xpath}]
-Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 144.0.7559.133, chrome: {chromedriverVersion: 143.0.7499.40 (c23ff452476d..., userDataDir: C:\Users\dnare\AppData\Loca...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:49536}, goog:processID: 21524, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), se:cdp: ws://localhost:49536/devtoo..., se:cdpVersion: 144.0.7559.133, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
-Session ID: 351ed1c854cfec151ab678f8fe36a95f
+Command: [b82d1f403bb5b2e64b9055f983903f38, findElement {value=//igx-nav-drawer//span[contains(@class, &apos;menu-l1-name&apos;) and normalize-space()=&apos;Stores&apos;], using=xpath}]
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 144.0.7559.133, chrome: {chromedriverVersion: 143.0.7499.40 (c23ff452476d..., userDataDir: C:\Users\dnare\AppData\Loca...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:51636}, goog:processID: 14540, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), se:cdp: ws://localhost:51636/devtoo..., se:cdpVersion: 144.0.7559.133, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Session ID: b82d1f403bb5b2e64b9055f983903f38
 	at jdk.internal.reflect.GeneratedConstructorAccessor24.newInstance(Unknown Source)
 	at java.base/jdk.internal.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
 	at java.base/java.lang.reflect.Constructor.newInstanceWithCaller(Constructor.java:499)
@@ -208,17 +206,17 @@ Session ID: 351ed1c854cfec151ab678f8fe36a95f
 	at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:362)
 	at org.openqa.selenium.support.pagefactory.DefaultElementLocator.findElement(DefaultElementLocator.java:68)
 	at org.openqa.selenium.support.pagefactory.internal.LocatingElementHandler.invoke(LocatingElementHandler.java:38)
-	at jdk.proxy2/jdk.proxy2.$Proxy27.isDisplayed(Unknown Source)
+	at jdk.proxy2/jdk.proxy2.$Proxy26.isDisplayed(Unknown Source)
 	at org.openqa.selenium.support.ui.ExpectedConditions.elementIfVisible(ExpectedConditions.java:304)
 	at org.openqa.selenium.support.ui.ExpectedConditions$10.apply(ExpectedConditions.java:290)
 	at org.openqa.selenium.support.ui.ExpectedConditions$10.apply(ExpectedConditions.java:287)
 	at org.openqa.selenium.support.ui.ExpectedConditions$23.apply(ExpectedConditions.java:656)
 	at org.openqa.selenium.support.ui.ExpectedConditions$23.apply(ExpectedConditions.java:652)
 	at org.openqa.selenium.support.ui.FluentWait.until(FluentWait.java:203)
-	... 32 more
+	... 31 more
 </pre></div></td>
-<td>31</td>
-<td>Test.flowWiseTest.InventoryFlowTests@5c08c46a</td></tr>
+<td>50</td>
+<td>Test.flowWiseTest.InventoryFlowTests@3ecd267f</td></tr>
 </table><p>
 </body>
 </html>

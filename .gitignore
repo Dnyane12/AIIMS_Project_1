@@ -1,9 +1,13 @@
 # Compiled class files
 *.class
 
+test-output/
+target/
+*.log
+
+
 # Log files
 logs/
-*.log
 *.log.gz
 
 
@@ -13,7 +17,6 @@ logs/
 *.ear
 
 # Maven / Gradle
-target/
 build/
 
 # Eclipse / IntelliJ / VS Code
@@ -24,9 +27,14 @@ build/
 .classpath
 .settings/
 
+
 # OS files
 .DS_Store
 Thumbs.db
 
 # Environment variables / secrets
 .env
+
+
+# Selenium screenshots
+screenshots/

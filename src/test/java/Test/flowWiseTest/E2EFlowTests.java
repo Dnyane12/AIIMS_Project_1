@@ -37,15 +37,16 @@ public class E2EFlowTests extends SetUp{
 	
 	
 	         //Flow to Execute multi sale oredr flow
-		    @Test(enabled=true,groups = "sales-flow")
+		    @Test(enabled=true,groups = "sales-flow",priority=0)
 		    public void createSaleOrder() { 
 		    	saleOFlow.prepareEnvironment();
 		    	saleOFlow.createMultiSaleOrder();
 		    }
 
 		    
+		    //,dependsOnMethods = "createSaleOrder"
 		     //Flow to execute Sale Dispatch Flow.
-		    @Test(groups = "sales-flow" ,dependsOnMethods = "createSaleOrder")
+		    @Test(groups = "sales-flow",priority=1 )
 		    public void createSaleDispatch() {
 		    	try {
 		    	saleDisFlow.prapareEnvToDirectlyOpenSDForm();
@@ -56,8 +57,9 @@ public class E2EFlowTests extends SetUp{
 		    }
 
 		    
+		    //,dependsOnMethods = "createSaleDispatch"
 		    //Flow to execute Tax Invoice Flow.
-		    @Test(groups = "sales-flow",dependsOnMethods = "createSaleDispatch")
+		    @Test(groups = "sales-flow",priority=2)
 		    public void createTaxInvoice() {
 		    	System.out.print("dispatchNo in createTaxInvoice() of E2EFlowTest class:"+dispatchNo);
 		    	taxInvFlow.prepareEnvToDirectlyOpenSDForm();

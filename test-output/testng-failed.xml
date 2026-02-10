@@ -7,7 +7,7 @@
         <methods>
           <include name="compInvFlow"/>
           <include name="basicSetting"/>
-          <include name="validatePurchaseOrderCreation"/>
+          <include name="validateGRNCreation"/>
         </methods>
       </class> <!-- Test.flowWiseTest.InventoryFlowTests -->
     </classes>

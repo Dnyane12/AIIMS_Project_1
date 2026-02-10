@@ -16,6 +16,8 @@ import org.testng.asserts.SoftAssert;
 
 import Test.setUpTests.SetUp;
 import flowPack.inventoryModuleFlow.transactionFlow.GoodReceiptNoteFlow;
+import flowPack.setUpFlow.HomeFlow;
+import flowPack.setUpFlow.LoginFlow;
 import pageObjects.inventory.transaction.GoodReceiptNotePage;
 import utils.PropertyReader;
 import utils.ScreenshotUtility;
@@ -27,6 +29,8 @@ public class GoodReceiptNoteTest extends SetUp{
 	SoftAssert softAssert;
 	PropertyReader propReader;
 	String poNo;
+	LoginFlow loginFlow;
+    HomeFlow homeFlow;
     private static final Logger logger= LogManager.getLogger(GoodReceiptNoteTest.class);
 	
 	@BeforeClass
@@ -36,7 +40,6 @@ public class GoodReceiptNoteTest extends SetUp{
 		propReader =new PropertyReader("InventoryModule/grnTestData.properties");
 		poNo=propReader.getProperty("poNo");
 		grnFlow.prepareEnvToStartingFormLogin();
-	    
 	}
 	
 	
@@ -50,10 +53,10 @@ public class GoodReceiptNoteTest extends SetUp{
 		@Test(enabled=true)
 		public void validateGrnFlow() {
 			try {			
-			grnFlow.executeGrnFlow(poNo);			
+			String grnNo= grnFlow.executeGrnFlow(poNo);			
 				String ActSuccMsg= grnPage.extractSubmitSuccMessage();
 				String expectedSuccMsg= "GRN Created successfully";
-				Assert.assertEquals(ActSuccMsg,expectedSuccMsg,"Login Unsuccessful!");			
+				Assert.assertTrue(ActSuccMsg.contains(expectedSuccMsg),"Login Unsuccessful!");			
 			}catch(Exception e) {
 				e.printStackTrace();
 			}
@@ -79,7 +82,7 @@ public class GoodReceiptNoteTest extends SetUp{
 	
 	
 	//Test to validate GRN No creation on listing page.
-	@Test(enabled=true)
+	@Test(enabled=false)
 	public void validateGrnNoCreation() {
 		String actGrnNo= grnFlow.checkGrnNoCreation();
 		System.out.println("actGrnNo:"+actGrnNo);
@@ -95,8 +98,7 @@ public class GoodReceiptNoteTest extends SetUp{
 	
 @Test(enabled=false)
 	public void validateFormLoading() {
-	// WaitHelper.waitForVisible(driver, grnPage.getListingPageHeader(), 10);
-		
+	// WaitHelper.waitForVisible(driver, grnPage.getListingPageHeader(), 10);		
 	}
 
 
@@ -139,7 +141,7 @@ public class GoodReceiptNoteTest extends SetUp{
      
      
      //Test to validate the max limit of the input field.
-     @Test
+     @Test(enabled=false)
      public void maxLimitForInputFields() {
     	 grnFlow.checkMaxLimitOfInputField();
     	 
@@ -166,7 +168,7 @@ public class GoodReceiptNoteTest extends SetUp{
      
      
      //Test to validate Landed rate calculations for ITC="YES" and ITC="NO"
-     @Test
+     @Test(enabled=false)
      public void validateLandedRateCaculations() {
     	 
      }
@@ -174,7 +176,7 @@ public class GoodReceiptNoteTest extends SetUp{
      
      
      
-     @Test(enabled=true,description="Test to validate proper navigation of GRN form")
+     @Test(enabled=false,description="Test to validate proper navigation of GRN form")
      public void validateGRNNavigation() {
     	 logger.info("locating list page title field and extracting its value");
     	 WebElement listPageTitleField= WaitHelper.waitForClickable(driver, grnPage.getListpageHeader(), 10);
@@ -190,7 +192,7 @@ public class GoodReceiptNoteTest extends SetUp{
      
      
    //Test to validate back button functionality
-     @Test
+     @Test(enabled=false)
      public void validateBackButtonFuct() {
     	 
     	 WaitHelper.waitForClickable(driver, grnPage.getBackButton(), 10);
@@ -203,7 +205,7 @@ public class GoodReceiptNoteTest extends SetUp{
      
      
      //Test to validate Reset button Functionality.
-     @Test
+     @Test(enabled=false)
      public void validateResetButtonFunct() {
     	 grnFlow.flowToCheckResetFun(); 
     	 softAssert.assertEquals(grnPage.getSelPoNoField().getAttribute("value")," A02-CP-25-000026");

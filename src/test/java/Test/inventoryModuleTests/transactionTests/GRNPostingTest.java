@@ -8,11 +8,13 @@ import org.testng.asserts.SoftAssert;
 import Test.setUpTests.SetUp;
 import flowPack.inventoryModuleFlow.transactionFlow.GRNPostingFlow;
 import pageObjects.inventory.transaction.GRNPostingPage;
+import utils.PropertyReader;
 
 public class GRNPostingTest extends SetUp{
 	GRNPostingFlow GRNPostFlow;
 	GRNPostingPage GRNPostPage;
 	SoftAssert softAssert;
+	PropertyReader propReader;
 	
 	
 	@BeforeClass
@@ -21,12 +23,13 @@ public class GRNPostingTest extends SetUp{
 		GRNPostPage= new GRNPostingPage(driver);
 		GRNPostFlow.openFormFromLogin();
 		softAssert = new SoftAssert();
+		propReader= new PropertyReader("InventoryModule/GRNPostingTestData.properties");
 	}
 	
 	
 	@Test
 	public void validateGRNPostingCreation() {
-		GRNPostFlow.executeGRNPostingFlow();       
+		GRNPostFlow.executeGRNPostingFlow(propReader.getProperty("GRNNo"));       
 		
 		String actSuccMsg =GRNPostPage.extractSuccMsg();
 		String expSuccMsg="Voucher Created successfully, ID:";

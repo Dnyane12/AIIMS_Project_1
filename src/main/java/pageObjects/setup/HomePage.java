@@ -47,8 +47,7 @@ public class HomePage {
 	@FindBy(xpath = "(//span[contains(normalize-space(.), 'Configure Master') and contains(@class,'fs-13')])[1]")
 	private WebElement configMasterLink;
 
-	@FindBy(xpath = "(//span[contains(@class,'fs-13') and normalize-space(text())='Stores'])[1]")
-	private WebElement storeLink;
+	By storeLink= By.xpath("(//span[contains(@class,'fs-13') and normalize-space(text())='Stores'])[1]");
 	
 	@FindBy(xpath="(//span[normalize-space(text())='Transaction' and contains(@class,'fs-13')])[1]")
 	private WebElement transactionLink;
@@ -134,11 +133,11 @@ public class HomePage {
 		return configMasterLink;
 	}
 
-	public WebElement getStoreLink() {
+	public By getStoreLink() {
 		return storeLink;
 	}
 
-	public void setStoreLink(WebElement storeLink) {
+	public void setStoreLink(By storeLink) {
 		this.storeLink = storeLink;
 	}
 

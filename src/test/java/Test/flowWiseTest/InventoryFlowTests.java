@@ -20,24 +20,27 @@ import flowPack.salesModuleFlow.transactionFlow.SaleDispatchFlow;
 import flowPack.salesModuleFlow.transactionFlow.TaxInvoiceFlow;
 import flowPack.setUpFlow.HomeFlow;
 import flowPack.setUpFlow.LoginFlow;
+import pageObjects.inventory.transaction.GoodReceiptNotePage;
+import utils.WaitHelper;
 
 public class InventoryFlowTests extends SetUp{
 	    //This class going to execute only the flow test cases.
-		LoginFlow loginFlow;
-		HomeFlow homeFlow;
 		PurchaseOrderFlow poFlow;
 		GoodReceiptNoteFlow grnFlow;
+		GoodReceiptNotePage grnPage;
 		GRNPostingFlow grnPostFlow;
 		VoucherPrintingRepFlow vpRepFlow;		
 		PurchaseReturnFlow prnFlow;
 		PRNPrintingRepFlow prnRepFlow;
 		GRNPrintingFlow grnRepFlow;
-		POPrintingRepFlow poRepFlow;
+		POPrintingRepFlow poRepFlow;	
 		String poNo;
+		String grnNo;
 		String voucherNo;
-		
+		//LoginFlow loginFlow;
+		//HomeFlow homeFlow;
 			
-		@BeforeMethod(groups = "Inventory-flow")
+		@BeforeClass(groups = "Inventory-flow")
 		public void compInvFlow(){
 			System.out.println("called compInvFlow() ,@Before class method.");
 			poFlow = new PurchaseOrderFlow(driver);		
@@ -48,27 +51,35 @@ public class InventoryFlowTests extends SetUp{
 			prnRepFlow= new PRNPrintingRepFlow(driver);
 			grnRepFlow= new GRNPrintingFlow(driver);
 			poRepFlow= new POPrintingRepFlow(driver);
+			grnPage = new GoodReceiptNotePage(driver);
+			
+			
+			//loginFlow = new LoginFlow(driver);
+			//homeFlow = new HomeFlow(driver);
+			//loginFlow.loginFlowCheck();
+			//WaitHelper.waitForInvisibilityOfElementLocated(driver, grnPage.getDotSpinner(), 10);
+			//homeFlow.clickInvModAndStoreLink();
 		}
 		
 		
-			    @Test(groups = "Inventory-flow")
+			    @Test(groups = "Inventory-flow" ,priority=0)
 			    public void validatePurchaseOrderCreation() {
 			    	poFlow.prapareEnv();
 			    	poNo= poFlow.creatingPurchaseOrder();
 			    }
 
 			    
-			    @Test( enabled=true,groups = "Inventory-flow", dependsOnMethods = "validatePurchaseOrderCreation")			    
+			    @Test( enabled=true,groups = "Inventory-flow",priority=1)			    
 			    public void validateGRNCreation(){
 			    	grnFlow.prepareEnvToDirectlyOpenGRNForm();
-			    	grnFlow.executeGrnFlow(poNo);
+			    	String grnNo= grnFlow.executeGrnFlow(poNo);
 			    }
 
 			    	   			    
-			    @Test(enabled=true,groups = "Inventory-flow",dependsOnMethods = "validateGRNCreation")
+			    @Test(enabled=false,groups = "Inventory-flow",dependsOnMethods = "validateGRNCreation")
 			    public void validateGRNPosting() {
 			    	grnPostFlow.openFormDirectlyfromInvToAcc();
-			        voucherNo =grnPostFlow.executeGRNPostingFlow();
+			        voucherNo =grnPostFlow.executeGRNPostingFlow(grnNo);
 			    }
 			    
 			    
@@ -80,13 +91,13 @@ public class InventoryFlowTests extends SetUp{
 			    }
 			    
 			    
-			    @Test(enabled=true,groups = "Inventory-flow", dependsOnMethods = "validateGRNCreation")
+			    @Test(enabled=false,groups = "Inventory-flow", dependsOnMethods = "validateGRNCreation")
 			    public void createPurchaseRutNote() {
 			    	prnFlow.prepEnvToExeFromAcc();
 			    	prnFlow.executingFlowOfPRN();
 			    }
 			    
-			    @Test(enabled=true,groups = "Inventory-flow", dependsOnMethods = "createPurchaseRutNote")
+			    @Test(enabled=false,groups = "Inventory-flow", dependsOnMethods = "createPurchaseRutNote")
 			    public void executeFlowOfPRNPrintingRep() {
 			    	prnRepFlow.prepEnvdirectlyAfterPrn();
 			    	prnRepFlow.executePRNRepPrintFlow();
@@ -94,25 +105,25 @@ public class InventoryFlowTests extends SetUp{
 			    
 			    
 			    
-			    @Test(enabled=true,groups = "Inventory-flow")
+			    @Test(enabled=false,groups = "Inventory-flow")
 			    public void executeFlowOfGRNPrintingRep() {
 			    	grnRepFlow.prepEnvdirectlyAfterPrn();
 			    	grnRepFlow.executeGRNRepFlow();
 			    }
 			    
-			    @Test(enabled=true,groups = "Inventory-flow", dependsOnMethods = "validatePurchaseOrderCreation")
+			    @Test(enabled=false,groups = "Inventory-flow", dependsOnMethods = "validatePurchaseOrderCreation")
 			    public void executeFlowOfPurchaseOrderRep() {
 			    	prnFlow.prepEnvToExeFromAcc();
 			    	prnFlow.executingFlowOfPRN();
 			    }
 			    
-			    @Test(enabled=true,groups = "Inventory-flow", dependsOnMethods = "validatePurchaseOrderCreation")
+			    @Test(enabled=false,groups = "Inventory-flow", dependsOnMethods = "validatePurchaseOrderCreation")
 			    public void executeFlowOfStockStatusRep() {
 			    	prnFlow.prepEnvToExeFromAcc();
 			    	prnFlow.executingFlowOfPRN();
 			    }
 			    
-			    @Test(enabled=true,groups = "Inventory-flow", dependsOnMethods = "validatePurchaseOrderCreation")
+			    @Test(enabled=false,groups = "Inventory-flow", dependsOnMethods = "validatePurchaseOrderCreation")
 			    public void executeFlowOfLedgerPrinting() {
 			    	poRepFlow.prepEnvdirectlyOpenPoRep();
 			    	poRepFlow.executePoRepFlow();

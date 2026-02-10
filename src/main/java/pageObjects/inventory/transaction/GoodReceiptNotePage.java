@@ -3,6 +3,7 @@ package pageObjects.inventory.transaction;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -22,24 +23,22 @@ public class GoodReceiptNotePage {
 		PageFactory.initElements(driver, this);
 	}
 
-	@FindBy(xpath = "(//span[normalize-space(text())='Stores' and contains(@class,'fs-13')])[1]")
+	@FindBy(xpath="//igx-nav-drawer//span[contains(@class, 'menu-l1-name') and normalize-space()='Stores']")
 	private WebElement storeLink;
 
-	@FindBy(xpath = "(//span[contains(normalize-space(.),'Good Receipt Note') and contains(@class,'fs-12')])[1]")
-	private WebElement goodReceiptNoteFormLink;
+	By goodReceiptNoteFormLink =By.xpath("(//span[contains(normalize-space(.),'Good Receipt Note') and contains(@class,'fs-12')])[1]");
 
-	@FindBy(xpath = "(//button[contains(normalize-space(.),'Create New') and contains(@class,'icon-button')])[1]")
+	@FindBy(xpath="//div//button[contains(normalize-space(.),'Create New') and contains(@class,'icon-button')]")
 	private WebElement createNewButton;
 
-	By vendorDropField=By.xpath("(//label[normalize-space(text()='Vendor')]/following::input[@class='igx-input-group__input'])[1]");
+	By vendorDropField=By.xpath("(//label[normalize-space(text()='Vendor')]/following::input[@class='igx-input-group__input'])[6]");
 
 	By vendorDropOptField= By.xpath("//div//span[contains(normalize-space(text()),'SUP0000199')]");
 	
 	@FindBy(xpath = "(//label[normalize-space(text())='PO No.']/following::igx-icon[normalize-space(text())='expand_more'])[1]")
 	private WebElement poNoDropList;
 
-	@FindBy(xpath = "//input[@name='searchInput']")
-	private WebElement poNoSearchPopup;
+	By poNoSearchPopup =By.xpath("//input[@name='searchInput']");
 
 	@FindBy(xpath = "(//igx-checkbox[contains(@id,'igx-checkbox')])[3]")
 	private WebElement poOptionCheckbox;
@@ -50,7 +49,7 @@ public class GoodReceiptNotePage {
 	@FindBy(xpath = "//igx-grid//igx-grid-row")
 	private WebElement grid;
 
-	@FindBy(xpath = "//app-g-label[normalize-space(text())='GRN Info']")
+	@FindBy(xpath = "//span//app-g-label[normalize-space(text())='GRN Info']")
 	private WebElement grnInfoTab;
 
 	@FindBy(xpath = "(//label[normalize-space(text())='Transporter Mode']/following::igx-icon[normalize-space(text())='expand_more'])[1]")
@@ -98,7 +97,7 @@ public class GoodReceiptNotePage {
 	@FindBy(xpath = "//button[normalize-space(text())='Submit']")
 	private WebElement submitButton;
 
-	By dotSpinner = By.xpath("/html/body/app-root/div/div/div/div/div");
+	By dotSpinner = By.xpath("//div[@class='dot-spinner']");
 
 	@FindBy(xpath = "//input[contains(@id,'l_ingd_remarks')]")
 	private WebElement remarkField;
@@ -136,7 +135,34 @@ public class GoodReceiptNotePage {
 	By listpageHeader = By
 			.xpath("//span[contains(@class,'fs-18') and contains(normalize-space(),'Good Receipt Note')]");
 
+	@FindBy(xpath="//div[contains(normalize-space(text()),'GRN Created successfully ID:') and @class='igx-snackbar__message']")
+	private WebElement succMsg;
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 //Action methods
+	
+	public String extractGrnNo() {
+		WaitHelper.waitForVisible(driver,succMsg, 10);
+		String successMessage= succMsg.getText();
+		System.out.print("successMessage:"+successMessage);
+		return successMessage;
+		}
+	
+	
 	public WebElement getRemarkField() {
 		return remarkField;
 	}
@@ -164,13 +190,17 @@ public class GoodReceiptNotePage {
 	}
 
 	public void clickGrnLink() {
-		WaitHelper.waitForClickable(driver, goodReceiptNoteFormLink, 10);
-		goodReceiptNoteFormLink.click();
+		WaitHelper.waitForRefreshAndClick(driver, goodReceiptNoteFormLink, 10);
 	}
 
 	public void clickCreateNewButton() {
-		WaitHelper.waitForInvisibilityOfElementLocated(driver, dotSpinner, 10);
-		createNewButton.click();
+		WaitHelper.waitForInvisibilityOfElementLocated(driver, dotSpinner, 20);
+		JavascriptExecutor js=  (JavascriptExecutor)driver;
+		
+        WaitHelper.waitForClickable(driver, createNewButton, 10);
+		js.executeScript("arguments[0].scrollIntoView(true);", createNewButton);
+		js.executeScript("arguments[0].click();", createNewButton);
+		 //WaitHelper.waitForRefreshAndClick(driver, createNewButton, 20);
 	}
 
 	public void selectVendor(String vendorDropOption) {
@@ -179,8 +209,12 @@ public class GoodReceiptNotePage {
 
 	public void enterPoNoToSearch(String poNoDropOption) {
 		WaitHelper.waitForClickable(driver, poNoDropList, 10);
+		poNoDropList.click();
+		
 		WaitHelper.waitForClickable(driver, poNoSearchPopup, 10);
-		poNoSearchPopup.sendKeys(poNoDropOption);
+		WaitHelper.waitForRefreshAndClick(driver, poNoSearchPopup, 10);
+		
+		driver.findElement(poNoSearchPopup).sendKeys(poNoDropOption);
 		WaitHelper.waitForClickable(driver, poOptionCheckbox, 10);
 		poOptionCheckbox.click();
 	}
@@ -191,7 +225,8 @@ public class GoodReceiptNotePage {
 	}
 
 	public void clickGrnInfoTab() {
-		WaitHelper.waitForClickable(driver, grnInfoTab, 10);
+		WaitHelper.waitForInvisibilityOfElementLocated(driver, dotSpinner, 20);
+		WaitHelper.waitForClickable(driver, grnInfoTab, 20);
 		grnInfoTab.click();
 	}
 
@@ -269,7 +304,7 @@ public class GoodReceiptNotePage {
 		try {
 			WaitHelper.waitForVisible(driver, netvalueWholeText, 10);
 			String compText = netvalueWholeText.getText();
-			String part[] = compText.split(":");
+			//String part[] = compText.split(":");
 			// String netAmount =part[1];
 
 			String netAmount = "";
@@ -342,21 +377,7 @@ public class GoodReceiptNotePage {
 	}
 
 	
-	public void openGRNFormDirectly() {
-		logger.info("Waiting for invisibility of dotSpinner.");
-		WaitHelper.waitForInvisibilityOfElementLocated(driver, dotSpinner, 20);
-		
-		logger.info("===== Starting GRN Flow Execution, waiting and clicking store link  =====");	
-		WaitHelper.waitForClickable(driver, storeLink, 10);
-		storeLink.click();
-		
-		WaitHelper.waitForClickable(driver, goodReceiptNoteFormLink, 10);
-		clickGrnLink();
-		logger.info("Opened Good Receipt Note form");
-
-		logger.info("Waiting for invisibility of dotspinner.");
-		WaitHelper.waitForInvisibilityOfElementLocated(driver, dotSpinner, 10);
-	}
+	
 	
 	
 	
@@ -370,6 +391,7 @@ public class GoodReceiptNotePage {
 	
 	
 //Getter & Setters
+	
 
 	public WebElement getStoreLink() {
 		return storeLink;
@@ -379,11 +401,11 @@ public class GoodReceiptNotePage {
 		this.storeLink = storeLink;
 	}
 
-	public WebElement getGoodReceiptNoteFormLink() {
+	public By getGoodReceiptNoteFormLink() {
 		return goodReceiptNoteFormLink;
 	}
 
-	public void setGoodReceiptNoteFormLink(WebElement goodReceiptNoteFormLink) {
+	public void setGoodReceiptNoteFormLink(By goodReceiptNoteFormLink) {
 		this.goodReceiptNoteFormLink = goodReceiptNoteFormLink;
 	}
 
@@ -411,11 +433,11 @@ public class GoodReceiptNotePage {
 		this.poNoDropList = poNoDropList;
 	}
 
-	public WebElement getPoNoSearchPopup() {
+	public By getPoNoSearchPopup() {
 		return poNoSearchPopup;
 	}
 
-	public void setPoNoSearchPopup(WebElement poNoSearchPopup) {
+	public void setPoNoSearchPopup(By poNoSearchPopup) {
 		this.poNoSearchPopup = poNoSearchPopup;
 	}
 
@@ -455,7 +477,7 @@ public class GoodReceiptNotePage {
 		return lrNoField;
 	}
 
-	public void setLrNo(WebElement lrNo) {
+	public void setLrNo(WebElement lrNoField) {
 		this.lrNoField = lrNoField;
 	}
 
@@ -463,7 +485,7 @@ public class GoodReceiptNotePage {
 		return lrDateField;
 	}
 
-	public void setLrDate(WebElement lrDate) {
+	public void setLrDate(WebElement lrDateField) {
 		this.lrDateField = lrDateField;
 	}
 
@@ -471,7 +493,7 @@ public class GoodReceiptNotePage {
 		return invoiceNoField;
 	}
 
-	public void setInvoiceNo(WebElement invoiceNo) {
+	public void setInvoiceNo(WebElement invoiceNoField) {
 		this.invoiceNoField = invoiceNoField;
 	}
 
@@ -479,7 +501,7 @@ public class GoodReceiptNotePage {
 		return invoiceDateField;
 	}
 
-	public void setInvoiceDate(WebElement invoiceDate) {
+	public void setInvoiceDate(WebElement invoiceDateField) {
 		this.invoiceDateField = invoiceDateField;
 	}
 
@@ -511,7 +533,7 @@ public class GoodReceiptNotePage {
 		return invoiceQtyField;
 	}
 
-	public void setInvoiceQty(WebElement invoiceQty) {
+	public void setInvoiceQty(WebElement invoiceQtyField) {
 		this.invoiceQtyField = invoiceQtyField;
 	}
 
@@ -519,7 +541,7 @@ public class GoodReceiptNotePage {
 		return receivedQtyField;
 	}
 
-	public void setReceivedQty(WebElement receivedQty) {
+	public void setReceivedQty(WebElement receivedQtyField) {
 		this.receivedQtyField = receivedQtyField;
 	}
 
@@ -527,7 +549,7 @@ public class GoodReceiptNotePage {
 		return acceptedQtyField;
 	}
 
-	public void setAcceptedQty(WebElement acceptedQty) {
+	public void setAcceptedQty(WebElement acceptedQtyField) {
 		this.acceptedQtyField = acceptedQtyField;
 	}
 
@@ -633,6 +655,10 @@ public class GoodReceiptNotePage {
 
 	public By getVendorDropOptField() {
 		return vendorDropOptField;
+	}
+
+	public WebElement getSuccMsg() {
+		return succMsg;
 	}
 
 	

@@ -230,7 +230,7 @@ public void clickPurSubModAndPOLink() {
 //driver.findElement(purchaseSubModLink).click();
 
 logger.info("Waiting and Clicking voucherLink");	
-WaitHelper.waitForInvisibilityOfElementLocated(driver, dotSpinner, 10);	
+WaitHelper.waitForInvisibilityOfElementLocated(driver, dotSpinner, 20);	
 WaitHelper.waitForRefreshAndClick(driver,purchaseSubModLink,10);
 
 WaitHelper.waitForClickable(driver, purchaseOrderLink, 10);

@@ -11,11 +11,8 @@
       <class name="Test.flowWiseTest.InventoryFlowTests">
         <methods>
           <include name="compInvFlow"/>
-          <include name="validateGRNPosting"/>
-          <include name="validateAccPayableVoucherRep"/>
-          <include name="validateGRNCreation"/>
           <include name="basicSetting"/>
-          <include name="createPurchaseRutNote"/>
+          <include name="validateGRNCreation"/>
           <include name="validatePurchaseOrderCreation"/>
         </methods>
       </class> <!-- Test.flowWiseTest.InventoryFlowTests -->
