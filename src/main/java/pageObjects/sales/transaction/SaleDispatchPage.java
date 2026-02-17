@@ -41,7 +41,7 @@ public class SaleDispatchPage {
 		   		   	       
     By dotSpinner = By.xpath("/html/body/app-root/div/div/div/div/div");
     
-	@FindBy(xpath="(//span[contains(text(),'Dispatch')]/parent::div)[1]")
+	@FindBy(xpath="(//igx-nav-drawer[@id='project-menu']//span[contains(normalize-space(text()),'Sale Dispatch')])[1]")
 	private WebElement saleDispatchLink;
    
    	
