@@ -45,19 +45,19 @@
   </test !-->
   
   
-    <test name="Sales Flow Only">
+    <!--test name="Sales Flow Only">
         <groups>
             <run>
                 <include name="sales-flow"/>
             </run>
         </groups>
-        <classes>           
+        <classes>                                                                      
             <class name="Test.flowWiseTest.E2EFlowTests"/>          
         </classes>
-    </test>
+    </test!-->
     
     
-     <!--test name="Inventory Flow Only">
+     <test name="Inventory Flow Only">
         <groups>
             <run>
                 <include name="Inventory-flow"/>
@@ -66,7 +66,7 @@
         <classes>         
             <class name="Test.flowWiseTest.InventoryFlowTests"/>          
         </classes>
-    </test!-->
+    </test>
     
     
      <!-- test name="po Test">

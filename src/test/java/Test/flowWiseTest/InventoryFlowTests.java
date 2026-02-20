@@ -1,5 +1,7 @@
 package Test.flowWiseTest;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
@@ -14,12 +16,14 @@ import flowPack.inventoryModuleFlow.transactionFlow.GoodReceiptNoteFlow;
 import flowPack.inventoryModuleFlow.transactionFlow.POPrintingRepFlow;
 import flowPack.inventoryModuleFlow.transactionFlow.PRNPrintingRepFlow;
 import flowPack.inventoryModuleFlow.transactionFlow.PurchaseReturnFlow;
+import flowPack.inventoryModuleFlow.transactionFlow.StockStatusRepFlow;
 import flowPack.inventoryModuleFlow.transactionFlow.VoucherPrintingRepFlow;
 import flowPack.salesModuleFlow.transactionFlow.MultiSaleOrderFlow;
 import flowPack.salesModuleFlow.transactionFlow.SaleDispatchFlow;
 import flowPack.salesModuleFlow.transactionFlow.TaxInvoiceFlow;
 import flowPack.setUpFlow.HomeFlow;
 import flowPack.setUpFlow.LoginFlow;
+import pageObjects.inventory.transaction.GRNPostingPage;
 import pageObjects.inventory.transaction.GoodReceiptNotePage;
 import utils.WaitHelper;
 
@@ -33,17 +37,20 @@ public class InventoryFlowTests extends SetUp{
 		PurchaseReturnFlow prnFlow;
 		PRNPrintingRepFlow prnRepFlow;
 		GRNPrintingFlow grnRepFlow;
-		POPrintingRepFlow poRepFlow;	
+		POPrintingRepFlow poRepFlow;
+		StockStatusRepFlow stockStRepFlow;
+		
 		String poNo;
 		String grnNo;
 		String voucherNo;
 		//LoginFlow loginFlow;
 		//HomeFlow homeFlow;
+		private static Logger logger =LogManager.getLogger(InventoryFlowTests.class);
 			
 		@BeforeClass(groups = "Inventory-flow")
 		public void compInvFlow(){
 			System.out.println("called compInvFlow() ,@Before class method.");
-			poFlow = new PurchaseOrderFlow(driver);		
+			System.out.println("driver: "+driver);			poFlow = new PurchaseOrderFlow(driver);		
 			grnFlow= new GoodReceiptNoteFlow(driver);		
 			grnPostFlow = new GRNPostingFlow(driver);
 			vpRepFlow = new VoucherPrintingRepFlow(driver);
@@ -64,38 +71,63 @@ public class InventoryFlowTests extends SetUp{
 		
 			    @Test(groups = "Inventory-flow" ,priority=0)
 			    public void validatePurchaseOrderCreation() {
+			    	try {
 			    	poFlow.prapareEnv();
 			    	poNo= poFlow.creatingPurchaseOrder();
+			    	}catch(Exception e) {
+			    		 logger.error("validatePurchaseOrderCreation failed: {}", e.getMessage(), e);  // prints to console
+			            throw e;  // rethrow so TestNG still marks it as failed
+			    	}
 			    }
 
 			    
-			    @Test( enabled=true,groups = "Inventory-flow",priority=1)			    
+			    @Test( enabled=true,groups = "Inventory-flow",dependsOnMethods = "validatePurchaseOrderCreation",priority=1)			    
 			    public void validateGRNCreation(){
 			    	grnFlow.prepareEnvToDirectlyOpenGRNForm();
-			    	String grnNo= grnFlow.executeGrnFlow(poNo);
+			    	 grnNo= grnFlow.executeGrnFlow(poNo);
 			    }
 
 			    	   			    
-			    @Test(enabled=false,groups = "Inventory-flow",dependsOnMethods = "validateGRNCreation")
+			    @Test(enabled=true,groups = "Inventory-flow",dependsOnMethods = "validateGRNCreation",priority=2)
 			    public void validateGRNPosting() {
+			    	try {
 			    	grnPostFlow.openFormDirectlyfromInvToAcc();
+			    	System.out.println("grnNo in validateGRNPosting method in  inventory flowtestclass: "+grnNo);
+			    	
 			        voucherNo =grnPostFlow.executeGRNPostingFlow(grnNo);
+			    	} catch (Exception e) {
+			            logger.error("validateGRNPosting failed: {}", e.getMessage(), e);  // prints to console
+			            throw e;  // rethrow so TestNG still marks it as failed
+			        }
+			    }
+			    
+			    
+			    @Test(enabled=true,groups = "Inventory-flow", dependsOnMethods = "validateGRNCreation",priority=3)
+			    public void createPurchaseRutNote() {
+			    	try {
+			    	prnFlow.prepEnvToExeFromAcc();
+			    	String prnNo=prnFlow.executingFlowOfPRN(grnNo);
+			    	} catch (Exception e) {
+			            logger.error("createPurchaseRutNote failed: {}", e.getMessage(), e);  // prints to console
+			            throw e;  // rethrow so TestNG still marks it as failed
+			        }
 			    }
 			    
 			    
 			    //,dependsOnMethods = "validateGRNPosting"
-			    @Test(enabled=false,groups = "Inventory-flow")
+			    @Test(enabled=false,groups = "Inventory-flow", dependsOnMethods ="validateGRNPosting")
 			    public void validateAccPayableVoucherRep() throws InterruptedException {
-			    	vpRepFlow.repFlowExeFromGRNPosting();
-			    	vpRepFlow.executeVPFlow(voucherNo);
+			    	try{
+			    		vpRepFlow.repFlowExeFromGRNPosting();
+			    	    vpRepFlow.executeVPFlow(voucherNo);
+			    } catch (Exception e) {
+		            logger.error("validateAccPayableVoucherRep failed: {}", e.getMessage(), e);  // prints to console
+		            throw e;  // rethrow so TestNG still marks it as failed
+		        }
 			    }
 			    
 			    
-			    @Test(enabled=false,groups = "Inventory-flow", dependsOnMethods = "validateGRNCreation")
-			    public void createPurchaseRutNote() {
-			    	prnFlow.prepEnvToExeFromAcc();
-			    	prnFlow.executingFlowOfPRN();
-			    }
+			   
 			    
 			    @Test(enabled=false,groups = "Inventory-flow", dependsOnMethods = "createPurchaseRutNote")
 			    public void executeFlowOfPRNPrintingRep() {
@@ -113,20 +145,19 @@ public class InventoryFlowTests extends SetUp{
 			    
 			    @Test(enabled=false,groups = "Inventory-flow", dependsOnMethods = "validatePurchaseOrderCreation")
 			    public void executeFlowOfPurchaseOrderRep() {
-			    	prnFlow.prepEnvToExeFromAcc();
-			    	prnFlow.executingFlowOfPRN();
+			    	poRepFlow.prepEnvdirectlyOpenPoRep();
+			    	poRepFlow.executePoRepFlow();
 			    }
 			    
 			    @Test(enabled=false,groups = "Inventory-flow", dependsOnMethods = "validatePurchaseOrderCreation")
 			    public void executeFlowOfStockStatusRep() {
-			    	prnFlow.prepEnvToExeFromAcc();
-			    	prnFlow.executingFlowOfPRN();
+			    	stockStRepFlow.prepEnvdirOpenStockStatusRep();
+			    	stockStRepFlow.executeStockStaRepFlow();
 			    }
 			    
 			    @Test(enabled=false,groups = "Inventory-flow", dependsOnMethods = "validatePurchaseOrderCreation")
 			    public void executeFlowOfLedgerPrinting() {
-			    	poRepFlow.prepEnvdirectlyOpenPoRep();
-			    	poRepFlow.executePoRepFlow();
+			    	
 			    }
 			    
 			    

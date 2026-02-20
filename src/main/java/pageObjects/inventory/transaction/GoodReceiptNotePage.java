@@ -49,11 +49,14 @@ public class GoodReceiptNotePage {
 	@FindBy(xpath = "//igx-grid//igx-grid-row")
 	private WebElement grid;
 
-	@FindBy(xpath = "//span//app-g-label[normalize-space(text())='GRN Info']")
-	private WebElement grnInfoTab;
+	By grnInfoTab=By.xpath("//span//app-g-label[normalize-space(text())='GRN Info']");
 
+	
 	@FindBy(xpath = "(//label[normalize-space(text())='Transporter Mode']/following::igx-icon[normalize-space(text())='expand_more'])[1]")
 	private WebElement transporterMode;
+	
+	@FindBy(xpath = "(//igx-grid-row[@role='row'])[1]")
+	private WebElement gridRow;
 
 	@FindBy(xpath = "//input[@id='l_ingh_lr_no']")
 	private WebElement lrNoField;
@@ -156,7 +159,7 @@ public class GoodReceiptNotePage {
 //Action methods
 	
 	public String extractGrnNo() {
-		WaitHelper.waitForVisible(driver,succMsg, 10);
+		WaitHelper.waitForVisible(driver,succMsg, 20);
 		String successMessage= succMsg.getText();
 		System.out.print("successMessage:"+successMessage);
 		return successMessage;
@@ -224,14 +227,13 @@ public class GoodReceiptNotePage {
 		fetchDataButton.click();
 	}
 
-	public void clickGrnInfoTab() {
-		WaitHelper.waitForInvisibilityOfElementLocated(driver, dotSpinner, 20);
+	public void clickGrnInfoTab() {	
 		WaitHelper.waitForClickable(driver, grnInfoTab, 20);
-		grnInfoTab.click();
+		WaitHelper.waitForRefreshAndClick(driver, grnInfoTab, 20);
 	}
 
 	public void selectTransporterMode(String transporterModeLabel, String transporterModeOption) {
-		WaitHelper.waitForClickable(driver, transporterMode, 10);
+		WaitHelper.waitForClickable(driver, transporterMode, 30);
 		WaitUtilityDuplicate.selectFromComboWithoutSearch(driver, transporterModeLabel, transporterModeOption);
 		// WaitUtilityDuplicate.selectFromComboWithoutSearch(driver, wait,
 		// transporterModeLabel, transporterModeOption);
@@ -301,35 +303,39 @@ public class GoodReceiptNotePage {
 	}
 
 	public void extractTotalNetAmount() {
-		try {
-			WaitHelper.waitForVisible(driver, netvalueWholeText, 10);
-			String compText = netvalueWholeText.getText();
-			//String part[] = compText.split(":");
-			// String netAmount =part[1];
+		
+//			WaitHelper.waitForTextToBePresentInElement(driver, netvalueWholeText,"Total Net Value:", 30);
+//			String compText = netvalueWholeText.getText();	
+//			String netAmount = "";
+//
+//			// If contains colon, extract value after colon
+//			if (compText.contains(":")) {
+//				netAmount = compText.substring(compText.indexOf(":") + 1).trim();
+//			} else {
+//				// Fallback: extract last word (numbers usually at end)
+//				String[] parts = compText.split(" ");
+//				netAmount = parts[parts.length - 1].trim();
+//			}
 
-			String netAmount = "";
+			
+			// Step 1: Wait for label to appear
+		    WaitHelper.waitForTextToBePresentInElement(driver, netvalueWholeText, "Total Net Value:", 30);
 
-			// If contains colon, extract value after colon
-			if (compText.contains(":")) {
-				netAmount = compText.substring(compText.indexOf(":") + 1).trim();
-			} else {
-				// Fallback: extract last word (numbers usually at end)
-				String[] parts = compText.split(" ");
-				netAmount = parts[parts.length - 1].trim();
-			}
-
+		    // Step 2: Poll until a valid numeric value appears after the colon
+		    WaitHelper.normalWait(driver,60);
+		    
+			
+		    String netAmount =WaitHelper.waitForValidNumericValueAfterColon(driver, netvalueWholeText,30);
+			
 			// logger.info("Extracted Net Amount: {}", netAmount);
 			System.out.println("netAmount in page class:" + netAmount);
 
-			WaitHelper.waitForClickable(driver, grnInfoTab, 10);
-			grnInfoTab.click();
+			WaitHelper.waitForRefreshAndClick(driver, grnInfoTab, 30);
 			WaitHelper.waitForClickable(driver, invoiceValueGrnInfoTab, 10);
 			invoiceValueGrnInfoTab.click();
 			invoiceValueGrnInfoTab.sendKeys(netAmount);
 			System.out.println("netAmount:" + netAmount);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		
 	}
 
 	public String extractGrnNoCreated() {
@@ -457,13 +463,10 @@ public class GoodReceiptNotePage {
 		this.fetchDataButton = fetchDataButton;
 	}
 
-	public WebElement getGrnInfoTab() {
+	public By getGrnInfoTab() {
 		return grnInfoTab;
 	}
 
-	public void setGrnInfoTab(WebElement grnInfoTab) {
-		this.grnInfoTab = grnInfoTab;
-	}
 
 	public WebElement getTransporterMode() {
 		return transporterMode;
@@ -659,6 +662,11 @@ public class GoodReceiptNotePage {
 
 	public WebElement getSuccMsg() {
 		return succMsg;
+	}
+
+
+	public WebElement getGridRow() {
+		return gridRow;
 	}
 
 	

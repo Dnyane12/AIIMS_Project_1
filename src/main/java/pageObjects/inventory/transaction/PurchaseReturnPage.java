@@ -32,24 +32,32 @@ public class PurchaseReturnPage {
 				
 		By dotSpinner =By.xpath("/html/body/app-root/div/div/div/div/div");
 
-		@FindBy(xpath="//div[contains(@class,'tw-flex')]//button[normalize-space(text())='Create New' and contains(@class,'icon-button')]")
-		private WebElement createNewButton;
+		By createNewButton = By.xpath("//div[contains(@class,'tw-flex')]//button[normalize-space(text())='Create New' and contains(@class,'icon-button')]");
+		
+		@FindBy(xpath="//div[contains(normalize-space(text()),'PRN Created successfully ID') and contains(@class,'igx-snackbar__message')]")
+		private WebElement succMsgField;
 		
 		
 
 		@FindBy(xpath="(//label[contains(normalize-space(text()),'GRN No')]/following::input[@class='igx-input-group__input'])[3]")
 		private WebElement grnNoDrop;
 		
-		@FindBy(xpath="//span[normalize-space(text())='A02-GRN-25-01734']")
-		private WebElement grnNoDropOptField;
+		@FindBy(xpath="//div[@role='listbox']//igx-display-container[contains(@class,'igx-display-container')]")
+		private WebElement grnNoDropOptList;
+		
+		
+		
 		
 		@FindBy(xpath="(//label[normalize-space(text())='Vendor' and contains(@id,'igx-label')]/following::input[@class='igx-input-group__input'])[1]")
 		private WebElement vendorDropList;
 		
+
+		By grnDetailsTab =By.xpath("//div[@class='igx-tabs__header-item-inner']//app-g-label[normalize-space(text())='GRN Details']");
 		
-		@FindBy(xpath="//app-g-label[normalize-space(text())='GRN Details']")
-		private WebElement grnDetailsTab;
-		
+	
+		By errorLoggerOverlay =By.xpath("//div[contains(@class,'right-container')]//div[contains(@class,'error-logger-api-response-overlay')]");
+	
+		By errorLogArrowDownBtn =By.xpath("//div//igx-icon[text()='keyboard_arrow_down']");
 		
 		@FindBy(xpath="(//igx-icon[contains(normalize-space(.),'edit') and contains(@class,'material-icons')])[1]")
 		private WebElement editIcon;
@@ -163,8 +171,7 @@ public class PurchaseReturnPage {
 		@FindBy(xpath="(//span[contains(normalize-space(text()),'CGST')and contains(@class,'pl-3')])[1]")
 		private WebElement cgstPerAmtLabelDis;
 		
-		@FindBy(xpath="//div//igx-icon[normalize-space(text())='home' and contains(@class,'material-icons')]")
-		private WebElement homeIcon;
+		By homeIcon = By.xpath("//div//igx-icon[normalize-space(text())='home' and contains(@class,'material-icons')]");
 		
 		
 		
@@ -182,8 +189,9 @@ public class PurchaseReturnPage {
 		
 		
 		public void clickHomeIcon() {
-			WaitHelper.waitForClickable(driver,homeIcon, 10);
-			homeIcon.click();
+			WaitHelper.waitForInvisibilityOfElementLocated(driver, dotSpinner, 20);
+			WaitHelper.waitForClickable(driver, driver.findElement(homeIcon), 20);
+			WaitHelper.waitForRefreshAndClick(driver,homeIcon, 20);
 		}
 
 		public void clickPurchaseSubModuleLink() {			
@@ -205,39 +213,37 @@ public class PurchaseReturnPage {
 		
 		public void clickCreateNewButton() {
 			logger.info("clicking create New button");
-			WaitHelper.waitForInvisibilityOfElementLocated(driver,dotSpinner, 20);	
-			WaitHelper.waitForClickable(driver,createNewButton, 20);
-			
-			((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView({block:'center'});", createNewButton);
-			WaitHelper.waitForClickable(driver,createNewButton, 10);
-			
-			//createNewButton.click();
-			try {
-				createNewButton.click();
-		    } catch (ElementClickInterceptedException e) {
-		        logger.warn("Click intercepted, trying JS click");
-		        ((JavascriptExecutor) driver).executeScript("arguments[0].click();", createNewButton);
-		    }
-			
-			WaitHelper.waitForInvisibilityOfElementLocated(driver,dotSpinner, 10);
+			WaitHelper.waitForInvisibilityOfElementLocated(driver,dotSpinner, 30);	
+			WaitHelper.waitForClickable(driver,createNewButton, 30);
+				
+			//createNewButton.click();		
+			WaitHelper.waitForRefreshAndClick(driver, createNewButton, 20);			
+			WaitHelper.waitForInvisibilityOfElementLocated(driver,dotSpinner, 20);
 		}
 		
 		
-		public void selectGrnNo(){			
-			WaitHelper.waitForClickable(driver, grnNoDrop, 10);	
+		public void selectGrnNo(String grnNo){			
+			WaitHelper.waitForClickable(driver, grnNoDrop, 30);	
 			grnNoDrop.click();
 			
+			WaitHelper.waitForVisible(driver, grnNoDropOptList, 30);
+			System.out.println("grnNo in purchaseReturnPage class: "+grnNo);
+			grnNoDrop.sendKeys(grnNo);
+						
+			WebElement grnNoDropOptField =  driver.findElement(By.xpath("//span[contains(normalize-space(text()),'" + grnNo.trim() + "')]"));
 			WaitHelper.waitForClickable(driver, grnNoDropOptField, 20);	
-			grnNoDropOptField.click();			
-			//WaitUtilityDuplicate.selectFromComboWithoutSearch(driver,grnDropLabel,grnDropOption);
+			grnNoDropOptField.click();		
 		}
-		
 		
 		
 		public void clickGrnDetailsTab() {
-			logger.info("clicling grnDetails tab");
-			WaitHelper.waitForClickable(driver,grnDetailsTab, 10);
-			grnDetailsTab.click();
+			logger.info("clicling grnDetails tab");						
+			WaitHelper.waitForInvisibilityOfElementLocated(driver, dotSpinner, 20);
+			WaitHelper.waitForClickable(driver,errorLogArrowDownBtn, 20);
+			WaitHelper.waitForRefreshAndClick(driver,errorLogArrowDownBtn, 20);
+			
+			WaitHelper.waitForClickable(driver,grnDetailsTab, 30);
+			WaitHelper.waitForRefreshAndClick(driver,grnDetailsTab, 20);
 		}
 		
 		
@@ -424,13 +430,8 @@ public class PurchaseReturnPage {
 		}
 
 
-		public WebElement getCreateNewButton() {
+		public By getCreateNewButton() {
 			return createNewButton;
-		}
-
-
-		public void setCreateNewButton(WebElement createNewButton) {
-			this.createNewButton = createNewButton;
 		}
 
 
@@ -444,15 +445,10 @@ public class PurchaseReturnPage {
 		}
 
 
-		public WebElement getGrnDetailsTab() {
+		public By getGrnDetailsTab() {
 			return grnDetailsTab;
 		}
-
-
-		public void setGrnDetailsTab(WebElement grnDetailsTab) {
-			this.grnDetailsTab = grnDetailsTab;
-		}
-
+	
 
 		public WebElement getEditIcon() {
 			return editIcon;
@@ -716,9 +712,19 @@ public class PurchaseReturnPage {
 			this.cgstPerAmtLabelDis = cgstPerAmtLabelDis;
 		}
 
-		public WebElement getGrnNoDropOptField() {
-			return grnNoDropOptField;
+		public WebElement getSuccMsgField() {
+			return succMsgField;
 		}
+
+		public WebElement getGrnNoDropOptList() {
+			return grnNoDropOptList;
+		}
+
+		public By getErrorLoggerOverlay() {
+			return errorLoggerOverlay;
+		}
+
+		
 		
 		
 		

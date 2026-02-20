@@ -46,8 +46,21 @@ public class GoodReceiptNoteFlow {
 			
 			
 			WaitHelper.waitForClickable(driver, grnPage.getGoodReceiptNoteFormLink(), 10);
-			grnPage.clickGrnLink();
-			logger.info("Opened Good Receipt Note form");
+			// Capture current URL before clicking
+		    String previousUrl = driver.getCurrentUrl();
+		    System.out.println("Previous URL: " + previousUrl);
+
+		    grnPage.clickGrnLink();
+		    logger.info("Opened Good Receipt Note form");
+		    
+		    String currentUrl = driver.getCurrentUrl();
+		    System.out.println("current Url: " + currentUrl);
+
+		    WaitHelper.waitToDealWithCatche(driver,previousUrl);
+			
+		    String currentUrl1 = driver.getCurrentUrl();
+		    System.out.println("current Url1: " + currentUrl1);
+			
 
 			logger.info("Waiting for invisibility of dotspinner.");
 			WaitHelper.waitForInvisibilityOfElementLocated(driver, grnPage.getDotSpinner(), 10);
@@ -85,13 +98,16 @@ public class GoodReceiptNoteFlow {
 		logger.info("Clicked Create New button");
 
 		logger.info("Waiting for invisibility of dotSpinner.");
-		WaitHelper.waitForInvisibilityOfElementLocated(driver, grnPage.getDotSpinner(), 10);
+		WaitHelper.waitForInvisibilityOfElementLocated(driver, grnPage.getDotSpinner(), 30);
 		
-			logger.info("Step 3: Selecting Vendor and PO Number");		
+			logger.info("Step 3: Selecting Vendor and PO Number");	
+			WaitHelper.waitForClickable(driver, grnPage.getVendorDropField(), 30);
+			
 			grnPage.selectVendor(propReader.getProperty("vendorDropOption"));
 			logger.info("Vendor Selected: {}", propReader.getProperty("vendorDropOption"));
 
-		WaitHelper.waitForClickable(driver, grnPage.getPoNoDropList(), 10);
+		WaitHelper.waitForClickable(driver, grnPage.getPoNoDropList(), 20);
+		System.out.println("poNo in flow class: "+poNo);
 		grnPage.enterPoNoToSearch(poNo);
 		logger.info("PO Number Selected: {}", propReader.getProperty("poNoDropOption"));
 
@@ -99,10 +115,11 @@ public class GoodReceiptNoteFlow {
 		grnPage.clickFetchData();
 		logger.info("Clicked Fetch Data button");
 
+		WaitHelper.waitForVisible(driver,grnPage.getGridRow(), 20);
 		logger.info("Step 4: Entering GRN Information");		
 		grnPage.clickGrnInfoTab();
 
-		WaitHelper.waitForClickable(driver, grnPage.getTransporterMode(), 10);
+		WaitHelper.waitForClickable(driver, grnPage.getTransporterMode(), 20);
 		grnPage.selectTransporterMode(propReader.getProperty("transporterModeLabel"),
 				propReader.getProperty("transporterModeOption"));
 		logger.info("Transporter mode selected: {}", propReader.getProperty("transporterModeOption"));
@@ -139,8 +156,12 @@ public class GoodReceiptNoteFlow {
 		grnPage.clickUpdateButton();
 		logger.info("Update button clicked");
 
+		
+		// Give backend time to trigger recalculation
+		WaitHelper.waitForInvisibilityOfElementLocated(driver, grnPage.getDotSpinner(), 30);
+		
 		logger.info("Extracting Net Amount from GRN Details");
-		WaitHelper.waitForClickable(driver, grnPage.getNetvalueWholeText(), 10);
+		//WaitHelper.waitForVisible(driver, grnPage.getNetvalueWholeText(), 20);
 		grnPage.extractTotalNetAmount();
 
 		logger.info("Entered Net Amount in GRN Info tab");
@@ -152,6 +173,7 @@ public class GoodReceiptNoteFlow {
 				
 		logger.info("===== GRN Flow Executed Successfully =====");
 		return grnNoCreated;
+		
 		}catch(Exception e) {
 			e.printStackTrace();
 			return null;

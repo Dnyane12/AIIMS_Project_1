@@ -26,9 +26,10 @@ public class PurchaseReturnFlow {
 		this.driver=driver;
 		loginFlow=new LoginFlow(driver);
 		homeFlow= new HomeFlow(driver);
-		propReader = new PropertyReader("InventoryModule/PurchaseReturnTestData");
+		homePage = new HomePage(driver);
+		propReader = new PropertyReader("InventoryModule/PurchaseReturnTestData.properties");
 		prnPages= new PurchaseReturnPage(driver);
-		homePage = new HomePage(driver);		 
+				 
 	}
 	
 	
@@ -63,23 +64,23 @@ public class PurchaseReturnFlow {
 	}
 	
 	
-		public void executingFlowOfPRN() {
+		public String executingFlowOfPRN(String grnNo) {
 								
 			logger.info("clicking create New button");
 	        prnPages.clickCreateNewButton();
 	        
 	        logger.info("selecting GRN No.");
 	        WaitHelper.waitForInvisibilityOfElementLocated(driver, prnPages.getDotSpinner(), 15);	
-	        prnPages.selectGrnNo();
+	        prnPages.selectGrnNo(grnNo);
 			//prnPages.selectGrnNo(propReader.getProperty("grnDropLabel"),propReader.getProperty("grnDropOption"));
 			
 			
 			logger.info("clicking grn details tab");
-			WaitHelper.waitForClickable(driver, prnPages.getGrnDetailsTab(), 10);
+			//WaitHelper.waitForClickable(driver, prnPages.getGrnDetailsTab(), 20);
 			prnPages.clickGrnDetailsTab();
 			
 			logger.info("clicking edit button icon");
-			WaitHelper.waitForClickable(driver, prnPages.getEditIcon(), 10);
+			WaitHelper.waitForClickable(driver, prnPages.getEditIcon(), 20);
 			prnPages.clickEditButtonIcon();
 			
 			logger.info("entering return from store field value");
@@ -92,9 +93,26 @@ public class PurchaseReturnFlow {
 			
 			logger.info("clicking update button");
 			WaitHelper.waitForClickable(driver, prnPages.getUpdateButton(), 10);
-			prnPages.clickUpdateButton();	
+			prnPages.clickUpdateButton();
+			
+			logger.info("clicking submit button");
+			WaitHelper.waitForClickable(driver, prnPages.getSubmitBtn(), 10);
+			prnPages.clickSubmitButton();
+			
+			String prnNo=extractPrnNoFromUI();
+			return prnNo;
 					
 		}
+		
+		
+		public String extractPrnNoFromUI() {
+			WaitHelper.waitForVisible(driver, prnPages.getSuccMsgField(), 10);
+			String compSuccMsg= prnPages.getSuccMsgField().getText();
+			String prnNo= compSuccMsg.substring(compSuccMsg.indexOf(":")+1).trim();
+			logger.info("PRN No. generated is: "+prnNo);
+			return prnNo;
+		}
+		
 		
 		public void flowToValidatePRNCalculation() {
 			logger.info("called creatingPurchaseOrder flow method in purchasReturnflow");
@@ -140,14 +158,14 @@ public class PurchaseReturnFlow {
 		}
 		
 		
-		public void selectGRNNo() {
-			WaitHelper.waitForClickable(driver, prnPages.getGrnNoDrop(), 10);
-			prnPages.getGrnNoDrop().click();
-			prnPages.getGrnNoDrop().sendKeys(propReader.getProperty("grnDropOption"));
-			
-			WaitHelper.waitForClickable(driver, prnPages.getGrnNoDropOptField(), 10);
-			prnPages.getGrnNoDropOptField().click();
-		}
+//		public void selectGRNNo() {
+//			WaitHelper.waitForClickable(driver, prnPages.getGrnNoDrop(), 10);
+//			prnPages.getGrnNoDrop().click();
+//			prnPages.getGrnNoDrop().sendKeys(propReader.getProperty("grnDropOption"));
+//			
+//			WaitHelper.waitForClickable(driver, prnPages.getGrnNoDropOptField(), 10);
+//			prnPages.getGrnNoDropOptField().click();
+//		}
 		
 		
 		public void extractGRNDataFromDB() {

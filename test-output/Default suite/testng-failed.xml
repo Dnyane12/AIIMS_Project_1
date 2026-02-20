@@ -3,13 +3,13 @@
 <suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="Test.flowWiseTest.InventoryFlowTests">
+      <class name="Test.inventoryModuleTests.masterTests.PurchaseOrderTest">
         <methods>
-          <include name="compInvFlow"/>
           <include name="basicSetting"/>
-          <include name="validateGRNCreation"/>
+          <include name="objInitilization"/>
+          <include name="validatePurchaseOrderCreation"/>
         </methods>
-      </class> <!-- Test.flowWiseTest.InventoryFlowTests -->
+      </class> <!-- Test.inventoryModuleTests.masterTests.PurchaseOrderTest -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->

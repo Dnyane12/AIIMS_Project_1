@@ -1,15 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
-<suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
-  <test thread-count="5" name="Default test(failed)">
+<suite name="Failed suite [Full System Suite]">
+  <test thread-count="5" name="Inventory Flow Only(failed)">
+    <groups>
+      <run>
+        <include name="Inventory-flow"/>
+      </run>
+    </groups>
     <classes>
       <class name="Test.flowWiseTest.InventoryFlowTests">
         <methods>
           <include name="compInvFlow"/>
           <include name="basicSetting"/>
           <include name="validateGRNCreation"/>
+          <include name="createPurchaseRutNote"/>
+          <include name="validatePurchaseOrderCreation"/>
         </methods>
       </class> <!-- Test.flowWiseTest.InventoryFlowTests -->
     </classes>
-  </test> <!-- Default test(failed) -->
-</suite> <!-- Failed suite [Default suite] -->
+  </test> <!-- Inventory Flow Only(failed) -->
+</suite> <!-- Failed suite [Full System Suite] -->

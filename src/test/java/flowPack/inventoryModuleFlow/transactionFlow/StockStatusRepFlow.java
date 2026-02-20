@@ -21,7 +21,7 @@ public class StockStatusRepFlow {
 
 	public StockStatusRepFlow(WebDriver driver) {
 		this.driver=driver;
-		propReader =new PropertyReader("InventoryModule/stockStatusRepTestData");
+		propReader =new PropertyReader("InventoryModule/stockStatusRepTestData.properties");
 		loginFlow= new LoginFlow(driver);
 		homeFlow = new HomeFlow(driver);
 		stockStRepPage=new StockStatusRepPage(driver);
@@ -39,7 +39,7 @@ public class StockStatusRepFlow {
 		stockStRepPage.clickStockStaRepLink();
 	}
 
-	public void prepEnvdirectlyOpenPoRep() {		
+	public void prepEnvdirOpenStockStatusRep() {		
 		stockStRepPage.clickStockStaRepLink();	
 	}
 

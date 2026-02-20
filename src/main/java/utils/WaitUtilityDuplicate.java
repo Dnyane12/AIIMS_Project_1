@@ -15,13 +15,13 @@ public class WaitUtilityDuplicate {
 	public static void selectFromComboWithoutSearch(WebDriver driver, String labelText, String optionText) {
 		try {
 			try {
-				WebDriverWait shortWait = new WebDriverWait(driver, Duration.ofSeconds(10));
+				WebDriverWait shortWait = new WebDriverWait(driver, Duration.ofSeconds(20));
 				shortWait.until(ExpectedConditions
-						.invisibilityOfElementLocated(By.xpath("/html/body/app-root/div/div/div/div/div")));
+						.invisibilityOfElementLocated(By.xpath("//div[@class='dot-spinner']")));
 			} catch (Exception ignored) {
 		    }
 
-			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 
 			// Locate dropdown icon next to the label
 			String dropdIcon = "//label[normalize-space(text())='" + labelText + "']/following::igx-icon[1]";
@@ -31,10 +31,10 @@ public class WaitUtilityDuplicate {
 
 			try {
 				WebDriverWait shortWait = new WebDriverWait(driver, Duration.ofSeconds(10));
-				shortWait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("/html/body/app-root/div/div/div/div/div")));
+				shortWait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@class='dot-spinner']")));
 			 } catch (Exception ignored) {
 			}
-
+				
 			wait.until(ExpectedConditions.elementToBeClickable(iconLocator)).click();
 
 			// Faster for overlay with reduced timeout

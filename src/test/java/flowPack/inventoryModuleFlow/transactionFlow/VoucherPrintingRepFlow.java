@@ -63,6 +63,7 @@ public void prepareEnvFromLogin() {
 		
 	public void executeVPFlow(String voucherNo) throws InterruptedException {	
 		
+		System.out.println("voucher no in flow class: "+voucherNo);
 		vpRepPage.selectDocType(propReader.getProperty("docType"));
 		
 		vpRepPage.selectFromDate(propReader.getProperty("fromDateValue"));

@@ -54,6 +54,7 @@ public class GRNPostingFlow {
 	
 	//Method to execute GRN posting Flow
 	public String executeGRNPostingFlow(String grnNo) {
+		System.out.println("grnNo executeGRNPostingFlow in flow class: "+grnNo);
 		GRNPostPage.SearchGRNNo(grnNo);
 		GRNPostPage.clickForwordArrowIcon();
 		GRNPostPage.clickPostGRNButton();

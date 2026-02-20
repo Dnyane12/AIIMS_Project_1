@@ -13,6 +13,7 @@
           <include name="compInvFlow"/>
           <include name="basicSetting"/>
           <include name="validateGRNCreation"/>
+          <include name="createPurchaseRutNote"/>
           <include name="validatePurchaseOrderCreation"/>
         </methods>
       </class> <!-- Test.flowWiseTest.InventoryFlowTests -->

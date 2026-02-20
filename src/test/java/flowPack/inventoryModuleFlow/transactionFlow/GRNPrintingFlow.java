@@ -22,7 +22,7 @@ public class GRNPrintingFlow {
 
 	public GRNPrintingFlow(WebDriver driver) {
 		this.driver=driver;
-		propReader =new PropertyReader("InventoryModule/grnPrintingRepTestData");
+		propReader =new PropertyReader("InventoryModule/grnPrintingRepTestData.properties");
 		loginFlow= new LoginFlow(driver);
 		homeFlow = new HomeFlow(driver);
 		grnPage=new GRNPrintingPage(driver);

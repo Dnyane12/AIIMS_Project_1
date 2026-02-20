@@ -22,7 +22,7 @@ public class POPrintingRepFlow {
 
 	public POPrintingRepFlow(WebDriver driver) {
 		this.driver=driver;
-		propReader =new PropertyReader("InventoryModule/poPrintingRepTestData");
+		propReader =new PropertyReader("InventoryModule/poPrintingRepTestData.properties");
 		loginFlow= new LoginFlow(driver);
 		homeFlow = new HomeFlow(driver);
 	    poPage=new POPrintingRepPage(driver);

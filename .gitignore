@@ -38,3 +38,7 @@ Thumbs.db
 
 # Selenium screenshots
 screenshots/
+
+target/
+allure-results/
+allure-report/

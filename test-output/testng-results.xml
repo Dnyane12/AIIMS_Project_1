@@ -1,32 +1,42 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testng-results ignored="8" total="10" passed="2" failed="0" skipped="0">
+<testng-results ignored="6" total="10" passed="4" failed="0" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2026-02-10T17:49:06 IST" name="Full System Suite" finished-at="2026-02-10T17:50:23 IST" duration-ms="76824">
+  <suite started-at="2026-02-20T10:19:24 IST" name="Full System Suite" finished-at="2026-02-20T10:21:07 IST" duration-ms="103246">
     <groups>
       <group name="Inventory-flow">
-        <method signature="InventoryFlowTests.validatePurchaseOrderCreation()[pri:0, instance:Test.flowWiseTest.InventoryFlowTests@55562aa9]" name="validatePurchaseOrderCreation" class="Test.flowWiseTest.InventoryFlowTests"/>
-        <method signature="InventoryFlowTests.validateGRNCreation()[pri:1, instance:Test.flowWiseTest.InventoryFlowTests@55562aa9]" name="validateGRNCreation" class="Test.flowWiseTest.InventoryFlowTests"/>
+        <method signature="InventoryFlowTests.validatePurchaseOrderCreation()[pri:0, instance:Test.flowWiseTest.InventoryFlowTests@791cbf87]" name="validatePurchaseOrderCreation" class="Test.flowWiseTest.InventoryFlowTests"/>
+        <method signature="InventoryFlowTests.validateGRNCreation()[pri:1, instance:Test.flowWiseTest.InventoryFlowTests@791cbf87]" name="validateGRNCreation" class="Test.flowWiseTest.InventoryFlowTests"/>
+        <method signature="InventoryFlowTests.validateGRNPosting()[pri:2, instance:Test.flowWiseTest.InventoryFlowTests@791cbf87]" name="validateGRNPosting" class="Test.flowWiseTest.InventoryFlowTests"/>
+        <method signature="InventoryFlowTests.createPurchaseRutNote()[pri:3, instance:Test.flowWiseTest.InventoryFlowTests@791cbf87]" name="createPurchaseRutNote" class="Test.flowWiseTest.InventoryFlowTests"/>
       </group> <!-- Inventory-flow -->
     </groups>
-    <test started-at="2026-02-10T17:49:06 IST" name="Inventory Flow Only" finished-at="2026-02-10T17:50:23 IST" duration-ms="76824">
+    <test started-at="2026-02-20T10:19:24 IST" name="Inventory Flow Only" finished-at="2026-02-20T10:21:07 IST" duration-ms="103246">
       <class name="Test.flowWiseTest.InventoryFlowTests">
-        <test-method is-config="true" signature="basicSetting()[pri:0, instance:Test.flowWiseTest.InventoryFlowTests@55562aa9]" started-at="2026-02-10T17:49:06 IST" name="basicSetting" finished-at="2026-02-10T17:49:08 IST" duration-ms="1731" status="PASS">
+        <test-method is-config="true" signature="basicSetting()[pri:0, instance:Test.flowWiseTest.InventoryFlowTests@791cbf87]" started-at="2026-02-20T10:19:24 IST" name="basicSetting" finished-at="2026-02-20T10:19:26 IST" duration-ms="1925" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- basicSetting -->
-        <test-method is-config="true" signature="compInvFlow()[pri:0, instance:Test.flowWiseTest.InventoryFlowTests@55562aa9]" started-at="2026-02-10T17:49:08 IST" name="compInvFlow" finished-at="2026-02-10T17:49:08 IST" duration-ms="70" status="PASS">
+        <test-method is-config="true" signature="compInvFlow()[pri:0, instance:Test.flowWiseTest.InventoryFlowTests@791cbf87]" started-at="2026-02-20T10:19:26 IST" name="compInvFlow" finished-at="2026-02-20T10:19:26 IST" duration-ms="76" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- compInvFlow -->
-        <test-method signature="validatePurchaseOrderCreation()[pri:0, instance:Test.flowWiseTest.InventoryFlowTests@55562aa9]" started-at="2026-02-10T17:49:08 IST" name="validatePurchaseOrderCreation" finished-at="2026-02-10T17:50:02 IST" duration-ms="53919" status="PASS">
+        <test-method signature="validatePurchaseOrderCreation()[pri:0, instance:Test.flowWiseTest.InventoryFlowTests@791cbf87]" started-at="2026-02-20T10:19:26 IST" name="validatePurchaseOrderCreation" finished-at="2026-02-20T10:20:07 IST" duration-ms="40711" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- validatePurchaseOrderCreation -->
-        <test-method signature="validateGRNCreation()[pri:1, instance:Test.flowWiseTest.InventoryFlowTests@55562aa9]" started-at="2026-02-10T17:50:02 IST" name="validateGRNCreation" finished-at="2026-02-10T17:50:23 IST" duration-ms="21059" status="PASS">
+        <test-method signature="validateGRNCreation()[pri:1, instance:Test.flowWiseTest.InventoryFlowTests@791cbf87]" started-at="2026-02-20T10:20:07 IST" name="validateGRNCreation" finished-at="2026-02-20T10:20:30 IST" depends-on-methods="Test.flowWiseTest.InventoryFlowTests.validatePurchaseOrderCreation" duration-ms="22352" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- validateGRNCreation -->
+        <test-method signature="validateGRNPosting()[pri:2, instance:Test.flowWiseTest.InventoryFlowTests@791cbf87]" started-at="2026-02-20T10:20:30 IST" name="validateGRNPosting" finished-at="2026-02-20T10:20:41 IST" depends-on-methods="Test.flowWiseTest.InventoryFlowTests.validateGRNCreation" duration-ms="11834" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- validateGRNPosting -->
+        <test-method signature="createPurchaseRutNote()[pri:3, instance:Test.flowWiseTest.InventoryFlowTests@791cbf87]" started-at="2026-02-20T10:20:41 IST" name="createPurchaseRutNote" finished-at="2026-02-20T10:21:07 IST" depends-on-methods="Test.flowWiseTest.InventoryFlowTests.validateGRNCreation" duration-ms="26104" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- createPurchaseRutNote -->
       </class> <!-- Test.flowWiseTest.InventoryFlowTests -->
     </test> <!-- Inventory Flow Only -->
   </suite> <!-- Full System Suite -->

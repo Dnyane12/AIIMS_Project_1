@@ -20,13 +20,13 @@ private static Logger logger =LogManager.getLogger(GRNPostingPage.class);
 	}
 	
 	
-	@FindBy(xpath="//igx-icon[normalize-space(text())='home' and contains(@class,'material-icons')]")
-	private WebElement homeIcon;
+	
+	By homeIcon =By.xpath("//div[@class='igx-navbar__left']//igx-icon[normalize-space(text())='home' and contains(@class,'material-icons')]");
 	
 	@FindBy(xpath="//igx-card[contains(@id,'igx-card')]/following::h3[contains(text(),'Accounts')]")
 	private WebElement accountsMod;
 
-	By voucherLink=By.xpath("//igx-nav-drawer[contains(@id,'project-menu')]//span[contains(normalize-space(text()),'Purchase')]");
+	By voucherLink=By.xpath("//div[contains(@class,'mb-50')]//span[normalize-space(text())='Voucher']");
 	
 	By dotSpinner = By.xpath("//div[@class='dot-spinner']");
 	
@@ -57,8 +57,9 @@ private static Logger logger =LogManager.getLogger(GRNPostingPage.class);
 	
 	public void clickHomeIcon(){
 		logger.info("Waiting and Clicking Home Icon");
+		WaitHelper.waitForInvisibilityOfElementLocated(driver, dotSpinner, 10);
 		WaitHelper.waitForClickable(driver, homeIcon, 10);
-		homeIcon.click();
+		WaitHelper.waitForRefreshAndClick(driver, homeIcon, 10);
 	}
 	
 	public void clickAccountsMod(){
@@ -68,9 +69,14 @@ private static Logger logger =LogManager.getLogger(GRNPostingPage.class);
 	}
 
 	public void clickVoucherLink(){
-		logger.info("Waiting and Clicking voucherLink");	
-		WaitHelper.waitForInvisibilityOfElementLocated(driver, dotSpinner, 10);	
-		WaitHelper.waitForRefreshAndClick(driver,voucherLink,10);
+		//logger.info("Waiting and Clicking voucherLink");	
+		//WaitHelper.waitForInvisibilityOfElementLocated(driver, dotSpinner, 10);	
+		//WaitHelper.waitForRefreshAndClick(driver,voucherLink,10);
+		    logger.info("Waiting for dotSpinner invisibility");
+		    WaitHelper.waitForInvisibilityOfElementLocated(driver, dotSpinner, 20);
+		    logger.info("dotSpinner invisible, now clicking voucherLink"); // if this logs, spinner wait passed
+		    WaitHelper.waitForRefreshAndClick(driver, voucherLink, 20);
+		    logger.info("voucherLink clicked successfully");		
 	}
 
 	public void clickGRNPostingLink(){
@@ -85,10 +91,10 @@ private static Logger logger =LogManager.getLogger(GRNPostingPage.class);
 	
 	public void SearchGRNNo(String GRNNo) {
 		logger.info("Waiting for invisibility of dotSpinner");
-		WaitHelper.waitForInvisibilityOfElementLocated(driver, dotSpinner, 15);
+		WaitHelper.waitForInvisibilityOfElementLocated(driver, dotSpinner, 30);
 				
 		logger.info("Waiting and Clicking GRNPostingSearch field.");
-		WaitHelper.waitForClickable(driver, GRNPostingSearch,10);
+		WaitHelper.waitForClickable(driver, GRNPostingSearch,30);
 		GRNPostingSearch.click();
 		GRNPostingSearch.sendKeys(GRNNo);
 	}
@@ -132,7 +138,7 @@ private static Logger logger =LogManager.getLogger(GRNPostingPage.class);
 	
 	
 	//Getters and Setters
-	public WebElement getHomeIcon() {
+	public By getHomeIcon() {
 		return homeIcon;
 	}
 

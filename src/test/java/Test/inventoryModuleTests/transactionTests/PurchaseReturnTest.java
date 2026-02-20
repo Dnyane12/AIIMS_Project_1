@@ -18,6 +18,8 @@ public class PurchaseReturnTest extends SetUp{
 	private static final Logger logger = LogManager.getLogger(PurchaseReturnTest.class);
 	PropertyReader propReader;
     SoftAssert softAssert;
+    String grnNo;
+    
 	
 	@BeforeClass
 	public void objInitilization() {
@@ -25,6 +27,7 @@ public class PurchaseReturnTest extends SetUp{
 		prnPages = new PurchaseReturnPage(driver);
 		propReader = new PropertyReader("InventoryModule/PurchaseReturnTestData");
 		prnFlow.prepEnvFromLogin();
+		grnNo= propReader.getProperty("grnNo");
 	}
 
 	
@@ -32,7 +35,7 @@ public class PurchaseReturnTest extends SetUp{
 	@Test(enabled = true)
 	public void validateSucPRNCreation() {
 		logger.info("Executing complete flow of PRN.");
-		prnFlow.executingFlowOfPRN();
+		prnFlow.executingFlowOfPRN(grnNo);
 
 		logger.info("clicking submit button now");
 		WaitHelper.waitForClickable(driver, prnPages.getSubmitBtn(), 10);
@@ -42,14 +45,7 @@ public class PurchaseReturnTest extends SetUp{
 		logger.info("working on background logic to validate succssfull creation of PRN.");
 		WaitHelper.waitForVisible(driver, prnPages.getSubmitBtnSucusessMsg(), 10);
 		String actCompMsg = prnPages.getSubmitBtnSucusessMsg().getText();
-		String parts[] = actCompMsg.split(":");
-
-		//getting only "PRN Created successfully ID:" this part.
-		String actMsg = parts[0] + ":";
 		String expMsg = "PRN Created successfully ID:";
-		
-        String prnNo= parts[1];
-        System.out.println("prnNo:"+prnNo);
         
 		logger.info("validating actual msg shown on submitting PRN record using assert.");
 		//validating actMsg and expMsg using assert.
@@ -159,7 +155,7 @@ public class PurchaseReturnTest extends SetUp{
 	    }
 	    
 	     logger.info("Now checking in case of GRN NO is selected.");
-         prnFlow.selectGRNNo();
+	     prnPages.selectGrnNo(grnNo);
 				
 		String actualValue = prnPages.getVendorDropList().getAttribute("value");
 		String expectedValue = "SUP0000059 / HARIOM INDUSTRIES / 27AGMPK1283D1ZG";

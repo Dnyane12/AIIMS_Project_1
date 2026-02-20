@@ -49,14 +49,14 @@ public class PurchaseOrderFlow {
 		
 	//method to execute purchase order creation.
 	public String creatingPurchaseOrder() {
-		WaitHelper.waitForInvisibilityOfElementLocated(driver, poPages.getDotSpinner(), 10);
+		WaitHelper.waitForInvisibilityOfElementLocated(driver, poPages.getDotSpinner(), 20);
 		WaitHelper.waitForClickable(driver,poPages.getCreateNewButton(), 10);
 		
-		WaitHelper.waitForInvisibilityOfElementLocated(driver, poPages.getDotSpinner(), 20);
+		WaitHelper.waitForInvisibilityOfElementLocated(driver, poPages.getDotSpinner(), 30);
 		poPages.clickCreateNewBtn();
 		
        
-		WaitHelper.waitForInvisibilityOfElementLocated(driver, poPages.getDotSpinner(), 20);
+		WaitHelper.waitForInvisibilityOfElementLocated(driver, poPages.getDotSpinner(), 60);
 		//WaitHelper.waitForInvisibilityOfElementLocated(driver, poPages.getDotSpinner(), 10);
 		
 		poPages.selectSeries(propReader.getProperty("SeriesDropOption"));
@@ -85,7 +85,7 @@ public class PurchaseOrderFlow {
 		WaitHelper.waitForClickable(driver,poPages.getItemDtlTab(), 10);
 		poPages.clickItemDetailTab();
 		
-		WaitHelper.waitForClickable(driver,poPages.getItemDropdown(), 10);
+		WaitHelper.waitForClickable(driver,poPages.getItemDropdown(), 20);
 		poPages.selectItem(propReader.getProperty("ItemDropOption"));
 		
 		WaitHelper.waitForClickable(driver,poPages.getQuantity(), 10);

@@ -64,7 +64,8 @@ private WebElement printButtonIcon;
 
 //Action Methods
 public void clickReportLink() {
-	WaitHelper.waitForInvisibilityOfElementLocated(driver, dotSpinner, 10);
+	WaitHelper.waitForInvisibilityOfElementLocated(driver, dotSpinner, 20);
+	WaitHelper.waitForClickable(driver, reportLink, 20);
 	WaitHelper.waitForRefreshAndClick(driver, reportLink, 10);
 }
 

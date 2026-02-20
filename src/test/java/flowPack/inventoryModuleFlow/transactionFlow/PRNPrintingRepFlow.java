@@ -21,7 +21,7 @@ private static Logger logger= LogManager.getLogger(PRNPrintingRepFlow.class);
 
 public PRNPrintingRepFlow(WebDriver driver) {
 	this.driver=driver;
-	propReader =new PropertyReader("InventoryModule/prnPrintingTestData");
+	propReader =new PropertyReader("InventoryModule/prnPrintingTestData.properties");
 	loginFlow= new LoginFlow(driver);
 	homeFlow = new HomeFlow(driver);
 	prnPage=new PRNPrintingRepPage(driver);
