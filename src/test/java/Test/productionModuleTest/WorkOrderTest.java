@@ -19,6 +19,7 @@ public class WorkOrderTest extends SetUp {
 		workOPage = new WorkOrderPage(driver);
 		workOFlow = new WorkOrderFlow(driver);
 		softAssert = new SoftAssert();
+		workOFlow.startFromLogin();
 	}
 	
 	@Test(priority = 1,description = "Test to validate work order creation")

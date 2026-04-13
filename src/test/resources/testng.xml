@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite >
+<suite name="Full System Suite">
+	<!--listeners> <listener class-name="UtilityClasses.TestListener" /> </listeners 
+		! -->
+
+	<!--test name="Tax Invoice Test">
+		<classes>
+			<class name="Test.salesModuleTests.masterTests.PartyMasterTest"></class>
+		</classes>
+	</test-->
+
+
+	<!--test name="sales module">
+		<classes>
+			<class name="Test.salesModuleTests.PartyMasterTest" />
+		</classes>
+	</test -->
+
+	<!--test name="PurchaseOrderTest">
+		<classes>
+			<class name="Test.inventoryModuleTests.PurchaseOrderTest" />
+		</classes>
+	</test-->
+
+	<!--test name="SalesDispatchTest">
+		<classes>
+			<class name="Test.salesModuleTests.transTest.SalesDispatchTest" />
+		</classes>
+	</test-->
+
+
+	<!-- test name="MultiSaleOrderTest">
+		<classes>
+			<class
+				name="Test.salesModuleTests.transTest.MultiSaleOrderTest" />
+		</classes>
+	</test -->
+
+
+	<!-- test name="Tax Invoice Test">
+		<classes>
+			<class name="Test.salesModuleTests.transTest.TaxInvoiceTest"></class>
+		</classes>
+	</test-->
+
+	<!-- test name="po Test">
+		<classes>
+			<class
+				name="Test.inventoryModuleTests.masterTests.PurchaseOrderTest"></class>
+		</classes>
+	</test-->
+	
+	<test name="Accounts Bank Payment Test">
+		<classes>
+			<class
+				name="Test.accountsTest.masterTests.BankPaymentTest"></class>
+		</classes>
+	</test>
+
+</suite>
+

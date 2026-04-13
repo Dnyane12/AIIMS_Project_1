@@ -3,13 +3,13 @@
 <suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="Test.inventoryModuleTests.masterTests.PurchaseOrderTest">
+      <class name="Test.accountsTest.masterTests.AccountReceivableTest">
         <methods>
           <include name="basicSetting"/>
-          <include name="objInitilization"/>
-          <include name="validatePurchaseOrderCreation"/>
+          <include name="objInit"/>
+          <include name="accountRececreateValidation"/>
         </methods>
-      </class> <!-- Test.inventoryModuleTests.masterTests.PurchaseOrderTest -->
+      </class> <!-- Test.accountsTest.masterTests.AccountReceivableTest -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->

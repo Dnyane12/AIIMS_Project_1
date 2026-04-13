@@ -1,22 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
 <suite name="Failed suite [Full System Suite]">
-  <test thread-count="5" name="Inventory Flow Only(failed)">
-    <groups>
-      <run>
-        <include name="Inventory-flow"/>
-      </run>
-    </groups>
+  <test thread-count="5" name="Accounts Bank Payment Test(failed)">
     <classes>
-      <class name="Test.flowWiseTest.InventoryFlowTests">
+      <class name="Test.accountsTest.masterTests.BankPaymentTest">
         <methods>
-          <include name="compInvFlow"/>
           <include name="basicSetting"/>
-          <include name="validateGRNCreation"/>
-          <include name="createPurchaseRutNote"/>
-          <include name="validatePurchaseOrderCreation"/>
+          <include name="bankPaymentcreateVali"/>
+          <include name="objInit"/>
         </methods>
-      </class> <!-- Test.flowWiseTest.InventoryFlowTests -->
+      </class> <!-- Test.accountsTest.masterTests.BankPaymentTest -->
     </classes>
-  </test> <!-- Inventory Flow Only(failed) -->
+  </test> <!-- Accounts Bank Payment Test(failed) -->
 </suite> <!-- Failed suite [Full System Suite] -->

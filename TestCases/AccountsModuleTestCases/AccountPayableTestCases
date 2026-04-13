@@ -1,0 +1,289 @@
+Module: Account Payable Voucher – Functional Test Cases
+🔹 Section 1: Form Initialization (High Priority)
+TC_AP_001 – Default Values Verification
+
+Precondition: Open “Account Payable / Create” form
+Steps:
+
+Navigate to form
+Observe default fields
+
+Expected Result:
+
+Doc Type = Account Payable (auto-selected)
+Series = Default (AP)
+Date = Current date
+Currency = INR
+Exchange Rate = 1
+TC_AP_002 – Mandatory Fields Check
+
+Steps:
+
+Click Submit without filling data
+
+Expected Result:
+
+Validation error for:
+Credit Account
+Narration
+Invoice No
+Debit Account
+🔹 Section 2: Credit To Section (Core Logic – High Priority)
+TC_AP_003 – Credit Account Selection Enables Flow
+
+Steps:
+
+Select Credit Account
+Enter Voucher Amount
+
+Expected Result:
+
+Ledger Balance auto-populates
+Base Currency Amount auto-calculates
+Debit section still disabled until required fields filled
+TC_AP_004 – Dependency Validation (IMPORTANT LOGIC)
+
+Steps:
+
+Select Credit Account
+Do NOT enter:
+Narration
+Invoice No
+Try selecting Debit Account
+
+Expected Result:
+
+Debit Account dropdown should be disabled / not clickable
+TC_AP_005 – Full Credit Section Completion Enables Debit Section
+
+Steps:
+
+Fill all required fields:
+Account
+Narration
+Invoice No
+Ref Date
+Due Date
+Try selecting Debit Account
+
+Expected Result:
+
+Debit Account dropdown becomes enabled
+
+👉 ⭐ This is your key business rule → MUST automate
+
+TC_AP_006 – Voucher Amount Calculation
+
+Steps:
+
+Enter Voucher Amount = 200
+Exchange Rate = 1
+
+Expected Result:
+
+Base Currency Amount = 200
+🔹 Section 3: Date Validations (High Priority)
+TC_AP_007 – Account Payable Date Range
+
+Steps:
+
+Try selecting date:
+Before 01-Apr-2025
+Future date
+
+Expected Result:
+
+Not allowed
+Only allowed:
+👉 01-Apr-2025 → Today
+TC_AP_008 – Ref Date Validation
+
+Steps:
+
+Select:
+Past date
+Today
+Future date
+
+Expected Result:
+
+Allowed: Past & Today
+Not allowed: Future
+TC_AP_009 – Due Date Validation
+
+Steps:
+
+Select:
+Past date
+Future date
+
+Expected Result:
+
+Both allowed (no restriction)
+🔹 Section 4: Ledger Balance Validation
+TC_AP_010 – Ledger Balance Fetch
+
+Steps:
+
+Select Credit Account
+
+Expected Result:
+
+Ledger Balance auto-fetched from backend
+Value matches ledger report
+TC_AP_011 – Ledger Type Display
+
+Steps:
+
+Observe Ledger Balance
+
+Expected Result:
+
+Should show:
+Dr / Cr properly
+Example: -12700 Cr
+🔹 Section 5: Debit Section (High Priority)
+TC_AP_012 – Debit Account Selection
+
+Precondition: Credit section completed
+
+Steps:
+
+Select Debit Account
+
+Expected Result:
+
+No error
+Ledger Balance auto-populated
+TC_AP_013 – Debit Amount Validation
+
+Steps:
+
+Enter amount different from voucher amount
+
+Expected Result:
+
+Either:
+Validation error OR
+System adjusts Net Amount
+TC_AP_014 – Debit vs Credit Matching
+
+Steps:
+
+Enter:
+Credit = 200
+Debit ≠ 200
+
+Expected Result:
+
+System should:
+Prevent submission OR
+Show mismatch error
+
+👉 ⭐ Critical accounting validation
+
+🔹 Section 6: Transaction Code
+TC_AP_015 – Txn Code Selection
+
+Steps:
+
+Select Txn Code (PURCHASE)
+
+Expected Result:
+
+Value saved correctly
+No validation error
+🔹 Section 7: Calculation & Net Amount
+TC_AP_016 – Net Amount Calculation
+
+Steps:
+
+Enter voucher amount
+Add debit
+
+Expected Result:
+
+Net Amount = Debit Amount
+TC_AP_017 – TDS Impact
+
+Steps:
+
+Apply TDS
+Check Net Amount
+
+Expected Result:
+
+Net Amount adjusted after TDS
+🔹 Section 8: Buttons Functionality
+TC_AP_018 – Draft Save
+
+Steps:
+
+Fill partial data
+Click Draft
+
+Expected Result:
+
+Data saved without full validation
+TC_AP_019 – Reset Button
+
+Steps:
+
+Enter data
+Click Reset
+
+Expected Result:
+
+Form cleared
+TC_AP_020 – Submit Button
+
+Steps:
+
+Fill complete valid data
+Click Submit
+
+Expected Result:
+
+Voucher created successfully
+Unique voucher number generated
+🔹 Section 9: Negative Scenarios (High Value)
+TC_AP_021 – Invalid Invoice No
+Special characters
+Empty
+
+👉 Expect validation error
+
+TC_AP_022 – Zero / Negative Amount
+
+Expected Result:
+
+Not allowed
+TC_AP_023 – Large Amount Handling
+
+Expected Result:
+
+System handles without crash
+🔹 Section 10: Business Flow (End-to-End)
+TC_AP_024 – Complete Voucher Flow
+
+Steps:
+
+Fill Credit Section
+Fill Debit Section
+Submit
+
+Expected Result:
+
+Entry posted in:
+Ledger
+Reports
+Trial Balance
+🔥 Automation Strategy (Important for You)
+
+Since you're doing Selenium:
+
+🔹 Automate First:
+Dependency flow (Credit → Debit enable) ⭐
+Date validations
+Amount calculations
+Submit flow

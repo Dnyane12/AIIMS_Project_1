@@ -63,7 +63,7 @@ public LoginPage(WebDriver driver) {
  
  
  public void enterUsernameField(String username) {
-	 WaitHelper.waitForClickable(driver, usernameField, 10);
+	 WaitHelper.waitForClickable(driver, usernameField, 20);
 	 usernameField.click();
 	 usernameField.sendKeys(username);
  }

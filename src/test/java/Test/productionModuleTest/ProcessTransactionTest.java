@@ -21,7 +21,9 @@ public class ProcessTransactionTest extends SetUp {
 	
 	@Test(priority = 1)
 	public void validateProcTransCreation() {
-		
+		//procTransFlow.directlyNavigateToProcessTransaction();
+		procTransFlow.directlyNavigateToProcessTransaction();
+		procTransFlow.processTransactionFlow();
 	}
 	
 }

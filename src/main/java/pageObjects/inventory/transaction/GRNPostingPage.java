@@ -117,7 +117,19 @@ private static Logger logger =LogManager.getLogger(GRNPostingPage.class);
 	public void clickSubmitButton() {
 		logger.info("Waiting and Clicking forward Arrow Icon field.");
 		WaitHelper.waitForClickable(driver, submitButton,10);
-		submitButton.click();			
+		submitButton.click();	
+	
+		
+//code for rapid/multiple clicks		
+//		logger.info("Waiting for submit button to be clickable.");
+//	    WaitHelper.waitForClickable(driver, submitButton, 10);
+//	    
+//	    JavascriptExecutor js = (JavascriptExecutor) driver;
+//	    for (int i = 0; i < times; i++) {
+//	        js.executeScript("arguments[0].click();", submitButton);
+//	        logger.info("Clicked submit button " + i + " times via JavaScript.");
+//	    }
+//	    logger.info("Clicked submit button " + times + " times via JavaScript.");
 	}
 	
 	

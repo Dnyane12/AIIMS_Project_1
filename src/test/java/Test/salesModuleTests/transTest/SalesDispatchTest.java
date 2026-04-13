@@ -54,7 +54,7 @@ public class SalesDispatchTest extends SetUp {
 	public void validateSaleDispatchFlow() {
 		try {		
 			logger.info("calling createSaleDispatchEntry method of flow class");
-			 String dispatchNo= saleDisFlow.createSaleDispatchEntry();
+			 String dispatchNo= saleDisFlow.createSaleDispatchEntry(5);
 			 
 			 logger.info("Storing dispatch no to use in another test class.");
 			 //ITestContext context

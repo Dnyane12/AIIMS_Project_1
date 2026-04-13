@@ -73,7 +73,7 @@ public WorkOrderStatusPage(WebDriver driver) {
 	
 	
 	public void clickConfOkBtn() {
-		WaitHelper.waitForVisible(driver, confPopup, 10);		
+		WaitHelper.waitForVisible(driver, confPopup, 20);		
 		WaitHelper.waitForClickable(driver, confOkBtn, 10);
 		confOkBtn.click();
 	}
@@ -100,8 +100,11 @@ public WorkOrderStatusPage(WebDriver driver) {
 	        WaitHelper.waitForClickable(driver, productionMenu, 10);
 	        productionMenu.click();
 	    }
-
 	 
+	 public void clickTransactionMenu() {
+	        WaitHelper.waitForRefreshAndClick(driver, transactionMenu, 10);
+	    }
+
 	 public void searchWoInGlobalSearchBar(String workOrderNo) {
 		 WaitHelper.waitForClickable(driver, globalSearchBar, 10);
 		 globalSearchBar.clear();
@@ -109,12 +112,6 @@ public WorkOrderStatusPage(WebDriver driver) {
 		 globalSearchBar.sendKeys(workOrderNo);
 	 }
 	 
-	 
-	    public void clickTransactionMenu() {
-	        WaitHelper.waitForRefreshAndClick(driver, transactionMenu, 10);
-	    }
-
-
 		public WebElement getWorkOrderStatusMenu() {
 			return workOrderStatusMenu;
 		}

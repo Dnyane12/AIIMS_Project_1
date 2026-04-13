@@ -119,7 +119,7 @@ public class GoodReceiptNoteFlow {
 		logger.info("Step 4: Entering GRN Information");		
 		grnPage.clickGrnInfoTab();
 
-		WaitHelper.waitForClickable(driver, grnPage.getTransporterMode(), 20);
+		WaitHelper.waitForClickable(driver, grnPage.getTransporterMode(), 30);
 		grnPage.selectTransporterMode(propReader.getProperty("transporterModeLabel"),
 				propReader.getProperty("transporterModeOption"));
 		logger.info("Transporter mode selected: {}", propReader.getProperty("transporterModeOption"));

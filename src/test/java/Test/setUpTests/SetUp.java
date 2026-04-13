@@ -15,15 +15,22 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 
+import utils.DriverProvider;
 import utils.PropertyReader;
 
-public class SetUp {
+public class SetUp implements DriverProvider{
 
     public static WebDriver driver;
     public static PropertyReader prop;
     private static final Logger logger = LogManager.getLogger(SetUp.class);
     public static boolean isDriverInitialized = false;
 
+    @Override
+	public WebDriver getDriver() {
+		return driver;
+	}
+    
+    
     @BeforeClass(alwaysRun = true)
     public void basicSetting() {
     	try {
@@ -72,6 +79,8 @@ public class SetUp {
     			e.printStackTrace();
     		}
     	}
+
+	
 
   
 

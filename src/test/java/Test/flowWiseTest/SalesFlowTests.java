@@ -13,7 +13,7 @@ import flowPack.salesModuleFlow.transactionFlow.TaxInvoiceFlow;
 import flowPack.setUpFlow.HomeFlow;
 import flowPack.setUpFlow.LoginFlow;
 
-public class E2EFlowTests extends SetUp{
+public class SalesFlowTests extends SetUp{
 	/*(E2E Flow Tests (Few, Critical) ,Purpose: 
 	Validate complete business flow ,Ensure no blockers in production-like scenarios ,Catch high-impact failures)*/
 	
@@ -50,7 +50,7 @@ public class E2EFlowTests extends SetUp{
 		    public void createSaleDispatch() {
 		    	try {
 		    	saleDisFlow.prapareEnvToDirectlyOpenSDForm();
-		         dispatchNo=saleDisFlow.createSaleDispatchEntry();
+		         dispatchNo=saleDisFlow.createSaleDispatchEntry(5);
 		    	}catch(Exception e) {
 		    		e.printStackTrace();
 		    	}
@@ -59,7 +59,7 @@ public class E2EFlowTests extends SetUp{
 		    
 		    //,dependsOnMethods = "createSaleDispatch"
 		    //Flow to execute Tax Invoice Flow.
-		    @Test(groups = "sales-flow",priority=2)
+		    @Test(enabled=true,groups = "sales-flow",priority=2)
 		    public void createTaxInvoice() {
 		    	System.out.print("dispatchNo in createTaxInvoice() of E2EFlowTest class:"+dispatchNo);
 		    	taxInvFlow.prepareEnvToDirectlyOpenSDForm();

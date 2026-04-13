@@ -1,5 +1,7 @@
 package pageObjects.production;
 
+import java.time.Duration;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
@@ -8,6 +10,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import utils.WaitHelper;
 
@@ -24,9 +28,7 @@ private static final Logger logger = LogManager.getLogger(WorkOrderPage.class);
 	
 
 	//WebElements
-	// ═════════════════════════════════════════════
     // SIDEBAR / NAVIGATION ELEMENTS
-    // ═════════════════════════════════════════════
 
     @FindBy(xpath = "//igx-card[contains(@id,'igx-card')]//div[@class='justify-start']//h3[contains(normalize-space(text()),'Production')]")
     WebElement productionMenu;
@@ -38,9 +40,7 @@ private static final Logger logger = LogManager.getLogger(WorkOrderPage.class);
 
      By workOrderMenu =By.xpath("(//div[@class='mb-50']//span[contains(normalize-space(.),'Work Order')])[1]");
 
-    // ═════════════════════════════════════════════
     // PAGE-LEVEL TABS
-    // ═════════════════════════════════════════════
 
     /** "CREATE" tab button */
     @FindBy(xpath = "//button[normalize-space()='CREATE'] | //span[normalize-space()='CREATE']/parent::button")
@@ -50,9 +50,7 @@ private static final Logger logger = LogManager.getLogger(WorkOrderPage.class);
     @FindBy(xpath = "//button[normalize-space()='SEARCH'] | //span[normalize-space()='SEARCH']/parent::button")
     WebElement searchTab;
 
-    // ═════════════════════════════════════════════
     // HEADER-ROW FORM FIELDS
-    // ═════════════════════════════════════════════
 
     /** Doc Type combo (e.g. "WORK ORDER") */
     @FindBy(xpath = "//label[normalize-space()='Doc Type']/ancestor::igx-input-group//input[@role='combobox']")
@@ -78,13 +76,10 @@ private static final Logger logger = LogManager.getLogger(WorkOrderPage.class);
     @FindBy(xpath = "//label[normalize-space()='Work Date']/ancestor::igx-input-group//igx-prefix[@igxpickertogggle] | //label[normalize-space()='Work Date']/ancestor::igx-input-group//igx-suffix[contains(@class,'clear')]")
     WebElement workDateClearButton;
 
-    // ═════════════════════════════════════════════
     // DETAIL-ROW FORM FIELDS
-    // ═════════════════════════════════════════════
 
-    /** Department combo (e.g. "DAIRY PRODUCTION") */
-    @FindBy(xpath = "//label[normalize-space()='Department']/ancestor::igx-input-group//input[@role='combobox']")
-    WebElement departmentDropdown;
+ 	/** Department combo / search */
+    By departmentDropdown =By.xpath("//label[normalize-space()='Department']/ancestor::igx-input-group//input[@role='combobox']");
 
     /** Department clear (×) button */
     @FindBy(xpath = "//label[normalize-space()='Department']/ancestor::igx-input-group//igx-suffix[@igxclearicon] | //label[normalize-space()='Department']/ancestor::igx-input-group//igx-icon[normalize-space()='clear']")
@@ -99,16 +94,13 @@ private static final Logger logger = LogManager.getLogger(WorkOrderPage.class);
     WebElement bomDropdown;
 
     /** Quantity numeric input */
-    @FindBy(xpath = "//label[normalize-space()='Quantity']/ancestor::igx-input-group//input[not(@role='combobox')]")
-    WebElement quantityInput;
+    By quantityInput = By.xpath("//label[normalize-space(text())='Quantity']/following::input[contains(@id,'l_pwot_primary_qty')]");
 
     /** UOM combo */
     @FindBy(xpath = "//label[normalize-space()='UOM']/ancestor::igx-input-group//input[@role='combobox']")
     WebElement uomDropdown;
 
-    // ═════════════════════════════════════════════
     // SECOND DETAIL-ROW FORM FIELDS
-    // ═════════════════════════════════════════════
 
     /** Route combo */
     @FindBy(xpath = "//label[normalize-space()='Route']/ancestor::igx-input-group//input[@role='combobox']")
@@ -142,9 +134,7 @@ private static final Logger logger = LogManager.getLogger(WorkOrderPage.class);
     @FindBy(xpath = "//label[normalize-space()='Remark']/ancestor::igx-input-group//input[not(@role='combobox')]")
     WebElement remarkInput;
 
-    // ═════════════════════════════════════════════
     // FOOTER ACTION BUTTONS
-    // ═════════════════════════════════════════════
 
     /** "Prev" button */
     @FindBy(xpath = "//button[normalize-space()='Prev'] | //span[normalize-space()='Prev']/parent::button")
@@ -159,20 +149,23 @@ private static final Logger logger = LogManager.getLogger(WorkOrderPage.class);
     WebElement resetButton;
 
     /** "Save" button */
-    @FindBy(xpath = "//button[normalize-space()='Submit'] | //span[normalize-space()='Submit']/parent::button")
-    WebElement submitButton;
-
-    // ═════════════════════════════════════════════
+    By submitButton =By.xpath("//button[@id='l_action_save_btn-width-selector']");
+    
+    //error message field after submission attempt
+    @FindBy(xpath = "//div//span[normalize-space(text())='Error Logs' and contains(@class,'custom-font-size')]")
+    WebElement errorLogMsgField;
+    
+    @FindBy(xpath = "//div//igx-icon[normalize-space(text())='keyboard_arrow_down' and contains(@class,'cursor-pointer')]")
+    WebElement downArrowIconForErrorLog;
+  
+    
     // SEARCH-BAR ELEMENT
-    // ═════════════════════════════════════════════
 
     /** Top global "Work Order Search" input */
     @FindBy(xpath = "//input[contains(@placeholder,'Work Order Search')]")
     WebElement workOrderSearchBar;
 
-    // ═══════════════════════════════════════════════════════════════
     // ACTION METHODS — NAVIGATION
-    // ═══════════════════════════════════════════════════════════════
 
     public void clickProductionMenu() {
         WaitHelper.waitForClickable(driver, productionMenu, 10);
@@ -187,9 +180,7 @@ private static final Logger logger = LogManager.getLogger(WorkOrderPage.class);
         WaitHelper.waitForRefreshAndClick(driver, workOrderMenu, 10);
     }
 
-    // ═══════════════════════════════════════════════════════════════
     // ACTION METHODS — TABS
-    // ═══════════════════════════════════════════════════════════════
 
     public void clickCreateTab() {
         WaitHelper.waitForClickable(driver, createTab, 10);
@@ -201,9 +192,7 @@ private static final Logger logger = LogManager.getLogger(WorkOrderPage.class);
         searchTab.click();
     }
 
-    // ═══════════════════════════════════════════════════════════════
     // ACTION METHODS — HEADER FIELDS
-    // ═══════════════════════════════════════════════════════════════
 
     public void selectDocType(String docType) {
         WaitHelper.waitForClickable(driver, docTypeDropdown, 10);
@@ -240,21 +229,21 @@ private static final Logger logger = LogManager.getLogger(WorkOrderPage.class);
         workDateClearButton.click();
     }
 
-    // ═══════════════════════════════════════════════════════════════
     // ACTION METHODS — DETAIL-ROW FIELDS
-    // ═══════════════════════════════════════════════════════════════
 
     public void selectDepartment(String department) {
-    	WaitHelper.waitForInvisibilityOfElementLocated(driver, dotSpinner, 20);
+    	WaitHelper.waitForInvisibilityOfElementLocated(driver, dotSpinner, 30);
   
-    	 WaitHelper.waitForVisible(driver,departmentDropdown,30);
-    	JavascriptExecutor js = (JavascriptExecutor) driver;   	
-        js.executeScript("arguments[0].scrollIntoView({block:'center', inline:'center'});", departmentDropdown);
-        WaitHelper.waitForClickable(driver, departmentDropdown,30);
-       
-        js.executeScript("arguments[0].click()", departmentDropdown);
-        departmentDropdown.sendKeys(department);
-        WaitHelper.selectDropDownOption(driver,department,10);
+    	 WaitHelper.waitForClickable(driver,departmentDropdown,20);
+    	 WaitHelper.waitForRefreshAndClick(driver, departmentDropdown, 20);
+    	 driver.findElement(departmentDropdown).clear();
+    	 
+    	WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));     	
+    	wait.until(ExpectedConditions.elementToBeClickable(departmentDropdown));
+    	   	
+        driver.findElement(departmentDropdown).sendKeys(department);
+        WaitHelper.waitForClickable(driver,departmentDropdown,20);
+        WaitHelper.selectDropDownOption(driver,department,20);
     }
 
     public void clearDepartment() {
@@ -264,28 +253,77 @@ private static final Logger logger = LogManager.getLogger(WorkOrderPage.class);
     }
 
     public void selectItem(String item) {
-        WaitHelper.waitForClickable(driver, itemDropdown, 10);
+        WaitHelper.waitForClickable(driver, itemDropdown, 20);
         itemDropdown.click();
         itemDropdown.sendKeys(item);
-        WaitHelper.selectDropDownOption(driver,item,10);
+        WaitHelper.selectDropDownOption(driver,item,20);
     }
 
     public void selectBOM(String bom) {
-        WaitHelper.waitForClickable(driver, bomDropdown, 10);
+    	WaitHelper.waitForInvisibilityOfElementLocated(driver, dotSpinner, 20);
+        WaitHelper.waitForClickable(driver, bomDropdown, 20);
         bomDropdown.click();
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
         bomDropdown.sendKeys(bom);
-        WaitHelper.selectDropDownOption(driver,bom,10);
+        WaitHelper.selectDropDownOption(driver,bom,20);
     }
 
     public void enterQuantity(String quantity) {
-        WaitHelper.waitForClickable(driver, quantityInput, 10);
-        quantityInput.clear();
-        quantityInput.sendKeys(quantity);
+//     WaitHelper.waitForClickable(driver, quantityInput, 20);
+//     WaitHelper.waitForRefreshAndClick(driver, quantityInput, 20);
+//     
+//     JavascriptExecutor js = (JavascriptExecutor) driver;
+//     js.executeScript("arguments[0].scrollIntoView(true);", driver.findElement(quantityInput));
+//     driver.findElement(quantityInput).sendKeys(quantity);
+//     WaitHelper.waitForInvisibilityOfElementLocated(driver, dotSpinner, 20);
+     
+     
+    
+    	 WaitHelper.waitForClickable(driver, quantityInput, 20);
+    	    WebElement field = driver.findElement(quantityInput);
+    	    JavascriptExecutor js = (JavascriptExecutor) driver;
+
+    	    // Step 1: Scroll into view and click to focus
+    	    js.executeScript("arguments[0].scrollIntoView(true);", field);
+    	    field.click();
+
+    	    // Step 2: Clear the field
+    	    //field.clear();
+    	    WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+
+    	    // Step 3: Type using sendKeys
+    	    field.sendKeys(quantity);
+
+    	    // Step 4: Wait for UI to react
+    	    WaitHelper.waitForInvisibilityOfElementLocated(driver, dotSpinner, 20);
+    	
+    	
+
+//    	 WaitHelper.waitForClickable(driver, quantityInput, 20);
+//    	    WebElement field = driver.findElement(quantityInput);
+//    	    JavascriptExecutor js = (JavascriptExecutor) driver;
+//
+//    	    // Step 1: Click to focus
+//    	    field.click();
+//
+//    	    // Step 2: Clear + set value + fire all events — single JS line
+//    	    js.executeScript(
+//    	        "arguments[0].focus(); arguments[0].value=arguments[1]; " +
+//    	        "arguments[0].dispatchEvent(new Event('input',{bubbles:true})); " +
+//    	        "arguments[0].dispatchEvent(new Event('change',{bubbles:true})); " +
+//    	        "arguments[0].dispatchEvent(new Event('blur',{bubbles:true}));",
+//    	        field, quantity
+//    	    );
+//
+//    	    // Step 3: Small pause for UI to react and enable submit button
+//    	    try { Thread.sleep(500); } catch (InterruptedException ignored) {}
+       
     }
 
     public String getQuantity() {
         WaitHelper.waitForVisible(driver, quantityInput, 10);
-        return quantityInput.getAttribute("value");
+        String qty=  driver.findElement(quantityInput).getAttribute("value");
+        return qty;
     }
 
     public void selectUOM(String uom) {
@@ -295,9 +333,7 @@ private static final Logger logger = LogManager.getLogger(WorkOrderPage.class);
         uomDropdown.sendKeys(uom);
     }
 
-    // ═══════════════════════════════════════════════════════════════
     // ACTION METHODS — SECOND DETAIL-ROW FIELDS
-    // ═══════════════════════════════════════════════════════════════
 
     public void selectRoute(String route) {
         WaitHelper.waitForClickable(driver, routeDropdown, 10);
@@ -344,9 +380,8 @@ private static final Logger logger = LogManager.getLogger(WorkOrderPage.class);
         remarkInput.sendKeys(remark);
     }
 
-    // ═══════════════════════════════════════════════════════════════
     // ACTION METHODS — FOOTER BUTTONS
-    // ═══════════════════════════════════════════════════════════════
+
 
     public void clickPrev() {
         WaitHelper.waitForClickable(driver, prevButton, 10);
@@ -364,13 +399,20 @@ private static final Logger logger = LogManager.getLogger(WorkOrderPage.class);
     }
 
     public void clickSubmitButton() {  	
-        WaitHelper.waitForClickable(driver, submitButton, 20);
-        submitButton.click();
+    	WaitHelper.waitForClickable(driver, submitButton, 20);    	
+        WaitHelper.waitForRefreshAndClick(driver, submitButton, 10);
+       // WaitHelper.waitForRefreshAndClick(driver, submitButton, 10);
+        
+        WaitHelper.waitForVisible(driver, errorLogMsgField, 20);
+        WaitHelper.waitForClickable(driver, errorLogMsgField, 30);
+        downArrowIconForErrorLog.click();
     }
 
-    // ═══════════════════════════════════════════════════════════════
+
+    
+    
+    
     // ACTION METHODS — GLOBAL SEARCH BAR
-    // ═══════════════════════════════════════════════════════════════
 
     public void enterWorkOrderSearch(String searchText) {
         WaitHelper.waitForClickable(driver, workOrderSearchBar, 10);
@@ -378,13 +420,9 @@ private static final Logger logger = LogManager.getLogger(WorkOrderPage.class);
         workOrderSearchBar.sendKeys(searchText);
     }
 
-    // ═══════════════════════════════════════════════════════════════
-    // COMPOSITE / HIGH-LEVEL METHODS
-    // ═══════════════════════════════════════════════════════════════
 
-    /**
-     * Navigates from the home dashboard to the Work Order Create page.
-     */
+    // COMPOSITE / HIGH-LEVEL METHODS  
+     // Navigates from the home dashboard to the Work Order Create page.    
     public void navigateToWorkOrderCreate() {
         clickProductionMenu();
         clickTransactionMenu();
@@ -441,6 +479,10 @@ private static final Logger logger = LogManager.getLogger(WorkOrderPage.class);
 
 	public WebElement getSuccMsg() {
 		return succMsg;
+	}
+
+	public WebElement getErrorLogMsgField() {
+		return errorLogMsgField;
 	}
 	
 	

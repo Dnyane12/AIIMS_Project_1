@@ -13,22 +13,22 @@ import utils.WaitHelper;
 
 public class WorkOrderFlow {
 	WebDriver driver;
-	WorkOrderPage workOPage;
 	LoginFlow loginFlow;
 	HomeFlow homeFlow;
+	WorkOrderPage workOPage;	
 	PropertyReader propReader;
 	private static final Logger logger = LogManager.getLogger(WorkOrderFlow.class);
 	
 	//Constructor
 	public WorkOrderFlow(WebDriver driver) {
 		this.driver = driver;
-		workOPage = new WorkOrderPage(driver);
 		loginFlow = new LoginFlow(driver);
 		homeFlow = new HomeFlow(driver);
+		workOPage = new WorkOrderPage(driver);	
 		propReader = new PropertyReader("productionModule/WorkOrderTestData.properties");
 	}
 	
-	public void loginSteps() {
+	public void startFromLogin() {
 		logger.info("===== Starting GRN Flow Execution, Step 1: Performing Login Flow=====");
 		loginFlow.loginFlowCheck();
 		
@@ -54,18 +54,17 @@ public class WorkOrderFlow {
 	
 	
 	public String extractSuccMsg() {
-		WaitHelper.waitForVisible(driver, workOPage.getSuccMsg(), 10);
+		WaitHelper.waitForVisible(driver, workOPage.getSuccMsg(), 30);
 		String successMsg = workOPage.getSuccMsg().getText().trim();
 		logger.info("Work Order Creation Success Message: " + successMsg);
 		return successMsg;		
 	}
 	
-	//Method to create work order
+	//flow Method to create work order
 	public void createWorkOrder() {
-		loginSteps();
 		workOPage.navigateToWorkOrderCreate();		
 		workOPage.fillDetailFields(propReader.getProperty("department"), propReader.getProperty("item"), propReader.getProperty("bom"), propReader.getProperty("quantity"));
-		workOPage.clickSubmitButton();	
+		workOPage.clickSubmitButton();			
 	}
 	
 

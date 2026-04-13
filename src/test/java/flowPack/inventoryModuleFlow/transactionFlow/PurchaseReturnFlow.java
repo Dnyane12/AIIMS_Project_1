@@ -60,7 +60,22 @@ public class PurchaseReturnFlow {
 		prnPages.clickHomeIcon();
 		homePage.clickInventoryModule();
 		prnPages.clickPurchaseSubModuleLink();
+		
+		// Capture current URL before clicking
+	    String previousUrl = driver.getCurrentUrl();
+	    System.out.println("Previous URL: " + previousUrl);
+	    
 		prnPages.clickPrnLink();
+		
+		// Capture current URL after clicking
+		 String currentUrl = driver.getCurrentUrl();
+		    System.out.println("current Url: " + currentUrl);
+
+		    WaitHelper.waitToDealWithCatche(driver,previousUrl);
+			
+		    // Capture current URL after clicking and waiting
+		    String currentUrl1 = driver.getCurrentUrl();
+		    System.out.println("current Url1: " + currentUrl1);
 	}
 	
 	
@@ -70,7 +85,7 @@ public class PurchaseReturnFlow {
 	        prnPages.clickCreateNewButton();
 	        
 	        logger.info("selecting GRN No.");
-	        WaitHelper.waitForInvisibilityOfElementLocated(driver, prnPages.getDotSpinner(), 15);	
+	        WaitHelper.waitForInvisibilityOfElementLocated(driver, prnPages.getDotSpinner(), 10);	
 	        prnPages.selectGrnNo(grnNo);
 			//prnPages.selectGrnNo(propReader.getProperty("grnDropLabel"),propReader.getProperty("grnDropOption"));
 			

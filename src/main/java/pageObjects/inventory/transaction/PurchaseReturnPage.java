@@ -213,8 +213,8 @@ public class PurchaseReturnPage {
 		
 		public void clickCreateNewButton() {
 			logger.info("clicking create New button");
-			WaitHelper.waitForInvisibilityOfElementLocated(driver,dotSpinner, 30);	
-			WaitHelper.waitForClickable(driver,createNewButton, 30);
+			WaitHelper.waitForInvisibilityOfElementLocated(driver,dotSpinner, 20);	
+			WaitHelper.waitForClickable(driver,createNewButton, 20);
 				
 			//createNewButton.click();		
 			WaitHelper.waitForRefreshAndClick(driver, createNewButton, 20);			
@@ -223,7 +223,7 @@ public class PurchaseReturnPage {
 		
 		
 		public void selectGrnNo(String grnNo){			
-			WaitHelper.waitForClickable(driver, grnNoDrop, 30);	
+			WaitHelper.waitForClickable(driver, grnNoDrop, 20);	
 			grnNoDrop.click();
 			
 			WaitHelper.waitForVisible(driver, grnNoDropOptList, 30);

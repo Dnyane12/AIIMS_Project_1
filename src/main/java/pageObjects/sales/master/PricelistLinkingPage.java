@@ -105,7 +105,7 @@ PropertyReader prop;
 		//logger.info("Entering Party Name");
 		//.until(ExpectedConditions.elementToBeClickable(partyName)).click();
 		String partyNameInput=prop.getProperty("partyName");
-		InputUtility.enterValueByLabel(driver,FormLabels.getPartynamelabel(),partyNameInput);	
+		//InputUtility.enterValueByLabel(driver,FormLabels.getPartynamelabel(),partyNameInput);	
 	}
 	
 	public void clickCheckBox() { 
